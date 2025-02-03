@@ -1,0 +1,22 @@
+.loginForm{
+    padding: 30.5vh 0;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    gap:20px;
+}
+.row{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+}
+.send-button{
+    width: 100px;
+}
+input{
+    background-color: white;
+    color: black;
+}
