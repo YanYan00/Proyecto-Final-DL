@@ -32,10 +32,6 @@ const UserProvider = ({children}) => {
             });
     
             const data = await response.json();
-            console.log('Respuesta del servidor:', {
-                status: response.status,
-                data: data
-            });
     
             if (!response.ok) {
                 throw new Error(data.message || 'Error de autenticación');
@@ -45,7 +41,6 @@ const UserProvider = ({children}) => {
                 localStorage.setItem('token', data.token);
                 setToken(data.token);
                 setEmail(data.user.correo);
-                navigate('/nanomarket');
             }
         } catch (error) {
             console.error('Error completo:', {
@@ -61,8 +56,28 @@ const UserProvider = ({children}) => {
         setEmail(null)
         navigate('/nanomarket')
     }
+
+    const register = async (nombre,email, password) =>{
+        try {
+            const response = await fetch('http://localhost:3000/api/register',{
+                method: 'POST',
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body: JSON.stringify({
+                    nombre,
+                    email,
+                    password
+                }),
+            });
+            const data = await response.json();
+            return data;
+        } catch (error) { 
+            console.log(error);
+        }
+    }
     return(
-        <UserContext.Provider value={{token,email,login,logout}}>
+        <UserContext.Provider value={{token,email,login,register,logout}}>
             {children}
         </UserContext.Provider>
     )

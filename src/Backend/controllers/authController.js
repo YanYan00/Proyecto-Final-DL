@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const {verificarCredencialesBD} =require("../models/authModels.js")
+const {verificarCredencialesBD,registrarUsuarioBD} =require("../models/authModels.js")
 
 
 const login = async(req, res) => {
@@ -25,7 +25,16 @@ const login = async(req, res) => {
         });
     }
 }
-
+const register = async(req,res) => {
+    try {
+        const usuario = req.body;
+        await registrarUsuarioBD(usuario);
+        res.send('Usuario registrado correctamente');
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
 module.exports={
-    login
+    login,
+    register
 }

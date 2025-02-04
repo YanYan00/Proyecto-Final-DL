@@ -4,11 +4,11 @@ INSERT INTO Categorias (nombre) VALUES
     ('Hogar'),
     ('Deportes'),
     ('Juguetes');
-
+--- Al loguearse ocupar contraseña 123456 con cualquier usuario ya que es la contraseña hasheada que estan aqui guardadas o crear una nueva en su defecto y hacer un update con la nueva contraseña
 INSERT INTO Usuarios (nombre, password, correo) VALUES
-    ('Juan Pérez', 'hashedpassword1', 'juan.perez@email.com'),
-    ('María González', 'hashedpassword2', 'maria.gonzalez@email.com'),
-    ('Pedro López', 'hashedpassword3', 'pedro.lopez@email.com');
+    ('Juan Pérez', '$2a$12$r5cvlQani3fdDgybNysU..v.EdPJJu.PsS6nUUiFrAs6qwgo3m3vS', 'juan.perez@email.com'),
+    ('María González', '$2a$12$r5cvlQani3fdDgybNysU..v.EdPJJu.PsS6nUUiFrAs6qwgo3m3vS', 'maria.gonzalez@email.com'),
+    ('Pedro López', '$2a$12$r5cvlQani3fdDgybNysU..v.EdPJJu.PsS6nUUiFrAs6qwgo3m3vS', 'pedro.lopez@email.com');
 
 INSERT INTO Productos (sku, descripcion, precio, stock, nombre, idCategoria) VALUES
     ('ELEC001', 'Smartphone Android 128GB', 299990, 10, 'Smartphone X', 1),
