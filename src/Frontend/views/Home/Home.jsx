@@ -3,13 +3,12 @@ import CardItem from "../../components/CardItem/CardItem";
 import { useContext } from "react";
 import { ItemsContext } from "../../context/ItemsContext";
 import './Home.css'
+import { CartContext } from "../../context/CartContext";
 
 
 const Home = () => {
   const { items } = useContext(ItemsContext);
-  const añadirItem = (item) => {
-    console.log("Añadiendo item:", item);
-};
+  const {añadirItem} = useContext(CartContext);
   return (
     <div className="text-center mt-10">
       <div className="cards">
