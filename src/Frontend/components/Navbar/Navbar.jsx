@@ -27,7 +27,7 @@ const Navbar = () => {
                             <Link to="/nanomarket/bookmarks" className="me-3">
                                 <Button variant="outline-light">🔖</Button>
                             </Link>
-                            <Link to="/nanomarket/menu" className="me-3">
+                            <Link to="/nanomarket/posts" className="me-3">
                                 <Button variant="outline-light">📑</Button>
                             </Link>
                             <Link to="/nanomarket/profile" className="me-3"><Button variant="warning">Mi Perfil</Button></Link>

@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Button, Col , Row } from "react-bootstrap";
 import './LoginPage.css'
-import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 
 const LoginPage = () => {
@@ -9,13 +8,7 @@ const LoginPage = () => {
     email:'',
     password:''
   })
-  const navigate = useNavigate();
-  const {login} = useContext(UserContext);
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await login(data.email, data.password);
-    navigate("/nanomarket");
-  };
+  const {handleLoginSubmit} = useContext(UserContext);
 
   const handleChange = (e) => {
       setData({
@@ -25,7 +18,7 @@ const LoginPage = () => {
   };
 
   return (
-    <form className="loginForm" onSubmit={handleSubmit}>
+    <form className="loginForm" onSubmit={(e) => handleLoginSubmit(e,data)}>
       <h2>Inicio de Sesión</h2>
       <Row className="row">
         <Col><input type="email" name="email" value={data.email} onChange={handleChange}/></Col>
