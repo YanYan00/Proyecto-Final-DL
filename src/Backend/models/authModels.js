@@ -22,8 +22,26 @@ const verificarCredencialesBD = async (correo, password) => {
         };
     }
 }
+const verificarCorreoRegistro = async (email) =>{
+    try {
+        const consulta = "SELECT correo FROM Usuarios WHERE correo = $1";
+        const result = await pool.query(consulta, [email]);
+        if (result.rowCount > 0){
+            throw{
+                code:400,
+                message:"Este correo esta registrado"
+            };
+        }
+    } catch (error) {
+        throw {
+            code: error.code || 500,
+            message: error.message || "Error al verificar el correo"
+        }
+    }
+}
 const registrarUsuarioBD = async (usuario) =>{
     let {nombre,email, password } = usuario;
+    await verificarCorreoRegistro(email);
     const passwordEncriptada = bcrypt.hashSync(password);
     const fechaCreacion = new Date().toISOString().split('T')[0];
     const values = [nombre,passwordEncriptada,fechaCreacion,email];

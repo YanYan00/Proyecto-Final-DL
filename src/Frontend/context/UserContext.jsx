@@ -84,6 +84,9 @@ const UserProvider = ({children}) => {
                 }),
             });
             const data = await response.json();
+            if(!response.ok){
+                throw new Error(data.error);
+            }
             return data;
         } catch (error) { 
             console.log(error);
@@ -100,6 +103,7 @@ const UserProvider = ({children}) => {
             await login(registerData.email, registerData.password);
             navigate("/nanomarket");
         } catch (error) {
+            alert(error.message);
             console.error('Error en el registro:', error);
         }
     };
