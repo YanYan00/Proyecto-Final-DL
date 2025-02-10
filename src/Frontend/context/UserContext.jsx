@@ -5,13 +5,16 @@ export const UserContext = createContext();
 const UserProvider = ({children}) => {
     const [email, setEmail] = useState(null);
     const [token, setToken] = useState(null);
+    const [id, setId] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
         localStorage.getItem('token');
         const tokenStorage = localStorage.getItem('token')
+        const userIdStorage = localStorage.getItem('id')
         if(tokenStorage){
-            setToken(tokenStorage)
+            setToken(tokenStorage);
+            setId(userIdStorage);
         }
     },[])
 //----------------------------------Login-----------------------------
@@ -21,7 +24,6 @@ const UserProvider = ({children}) => {
                 correo: email,
                 password: password
             };
-            console.log('Datos a enviar:', loginData);
     
             const response = await fetch('http://localhost:3000/api/login', {
                 method: 'POST',
@@ -32,15 +34,16 @@ const UserProvider = ({children}) => {
             });
     
             const data = await response.json();
-    
             if (!response.ok) {
                 throw new Error(data.message || 'Error de autenticación');
             }
     
             if (data.token) {
                 localStorage.setItem('token', data.token);
+                localStorage.setItem('id',data.user.idUsuario);
                 setToken(data.token);
                 setEmail(data.user.correo);
+                setId(data.user.idUsuario);
             }
         } catch (error) {
             console.error('Error completo:', {
@@ -59,10 +62,12 @@ const UserProvider = ({children}) => {
         }
     };
     const logout = () => {
-        localStorage.removeItem('token')
-        setToken(null)
-        setEmail(null)
-        navigate('/nanomarket')
+        localStorage.removeItem('token');
+        localStorage.removeItem('id');
+        setToken(null);
+        setEmail(null);
+        setId(null);
+        navigate('/nanomarket');
     }
 //----------------------------------------Register--------------------------------------------------
     const register = async (nombre,email, password) =>{
@@ -99,7 +104,7 @@ const UserProvider = ({children}) => {
         }
     };
     return(
-        <UserContext.Provider value={{token,email,login,register,logout, handleRegisterSubmit,handleLoginSubmit}}>
+        <UserContext.Provider value={{token,email,id,login,register,logout, handleRegisterSubmit,handleLoginSubmit}}>
             {children}
         </UserContext.Provider>
     )

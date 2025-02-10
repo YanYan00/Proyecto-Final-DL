@@ -10,10 +10,10 @@ const login = async(req, res) => {
         const response = {
             token,
             user: {
-                correo: usuario.correo
+                correo: usuario.correo,
+                idUsuario : usuario.idusuario
             }
         };
-        console.log('Respuesta a enviar:', response);
         res.status(200).json(response);
     } catch (error) {
         console.error('Error en controller:', {

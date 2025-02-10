@@ -1,22 +1,37 @@
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { ItemsContext } from "../../context/ItemsContext";
+import { UserContext } from "../../context/UserContext";
 
 const Profile = () => {
-  const { user, logout } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const {perfil,obtenerPerfilBD} = useContext(ItemsContext);
+  const {id,token} = useContext(UserContext);
 
-  if (!user) return <p className="text-center mt-10">No has iniciado sesión</p>;
-
+  useEffect(() => {
+    if (id && token) {
+      obtenerPerfilBD(id);
+    }
+  }, [id, token]);
+  if (!perfil) {
+    return (
+      <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+        <p className="text-center text-gray-600">Cargando perfil...</p>
+      </div>
+    );
+  }
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 shadow-lg">
-      <h2 className="text-2xl font-bold mb-4">Perfil</h2>
-      <p><strong>Correo:</strong> {user.email}</p>
-      <button className="mt-4 bg-red-500 text-white p-2 rounded w-full"
-        onClick={() => { logout(); navigate("/"); }}>
-        Cerrar Sesión
-      </button>
-    </div>
+    <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+            <h2 className="text-2xl font-bold mb-4">Perfil de Usuario</h2>
+            <div className="space-y-4">
+                <div>
+                    <p className="text-gray-600">Nombre:</p>
+                    <p className="font-medium">{perfil.nombre}</p>
+                </div>
+                <div>
+                    <p className="text-gray-600">Email:</p>
+                    <p className="font-medium">{perfil.correo}</p>
+                </div>
+            </div>
+        </div>
   );
 };
 
