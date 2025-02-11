@@ -40,5 +40,27 @@ server.post("/nanomarket/login",async (req,res)=>{
     }
 
 })
+server.post("/nanomarket/register",async(req,res)=>{
+    const comprobarEmail = async(email) =>{
+        const consulta = "SELECT correo FROM Usuarios WHERE correo = $1";
+        const result = await pool.query(consulta, [email]);
+        return result.rowCount>0;
+    }
+    try {
+        const {correo,password,nombre} = req.body;
+        const emailExiste = await comprobarEmail(correo);
+        if(emailExiste){
+            return res.status(400).json({error: "El correo ya está registrado"});
+        }
+        const passwordEncriptada =bcrypt.hashSync(password);
+        const fechaCreacion = new Date().toISOString().split('T')[0];
+        const values = [nombre,passwordEncriptada,fechaCreacion,correo];
+        const consulta = "INSERT INTO Usuarios VALUES (DEFAULT,$1,$2,$3,$4)";
+        await pool.query(consulta,values);
+        res.status(201).json({message: "Usuario registrado exitosamente"})
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+})
 module.exports = server;
 
