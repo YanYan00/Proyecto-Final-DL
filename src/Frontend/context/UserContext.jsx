@@ -6,6 +6,7 @@ const UserProvider = ({children}) => {
     const [email, setEmail] = useState(null);
     const [token, setToken] = useState(null);
     const [id, setId] = useState(null);
+    const [perfil,setPerfil] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -107,8 +108,53 @@ const UserProvider = ({children}) => {
             console.error('Error en el registro:', error);
         }
     };
+//----------------------------------------Perfil--------------------------------------------------------
+    const obtenerPerfilBD = async (id) => {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await fetch(`http://localhost:3000/api/profile/${id}`,{
+                headers:{
+                    'Authorization': `Bearer ${token}`}});
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);}          
+            const data = await response.json();
+            setPerfil(data);
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    }
+    const actualizarPerfilBD = async (id,datos) =>{
+        try {
+            const token = localStorage.getItem('token');
+            if(!token){
+                console.error('Token no encontrado');
+                return;
+            }
+            const dataEnviar ={
+                ...datos,
+                tipo:datos.password ? 'password' : 'datos'
+            }
+            const response = await fetch(`http://localhost:3000/api/profile/${id}`,{
+                method: 'PUT',
+                headers: {
+                    'Content-Type':'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(dataEnviar)
+            })
+            if(!response.ok){
+                throw new Error('Error al actualizar perfil');
+            }
+            const perfilActualizado = await response.json();
+            setPerfil(perfilActualizado);
+            return perfilActualizado;
+        } catch (error) {
+            console.error("Error:",error);
+            throw error;
+        }
+    }
     return(
-        <UserContext.Provider value={{token,email,id,login,register,logout, handleRegisterSubmit,handleLoginSubmit}}>
+        <UserContext.Provider value={{token,email,id,perfil,login,register,logout, handleRegisterSubmit,handleLoginSubmit,obtenerPerfilBD,actualizarPerfilBD}}>
             {children}
         </UserContext.Provider>
     )

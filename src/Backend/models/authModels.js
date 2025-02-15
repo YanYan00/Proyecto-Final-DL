@@ -48,7 +48,55 @@ const registrarUsuarioBD = async (usuario) =>{
     const consulta = "INSERT INTO Usuarios VALUES (DEFAULT,$1,$2,$3,$4)";
     await pool.query(consulta,values);
 }
+
+const verificarCorreoActualizacion = async (email,idUsuario) =>{
+    try {
+        const consulta = "SELECT correo FROM Usuarios WHERE correo=$1 AND idUsuario!=$2";
+        const result = await pool.query(consulta,[email,idUsuario]);
+        if(result.rowCount>0){
+            throw{
+                code:400,
+                message:"Este correo ya esta registrado"
+            };
+        }
+    } catch (error) {
+        throw{
+            code:error.code || 500,
+            message: error.message || "Error al verificar el correo"
+        }
+    }
+}
+const actualizarDatosBD = async(id,datos) => {
+    try {
+        await verificarCorreoActualizacion(datos.correo, id);
+        const consulta = "UPDATE Usuarios SET nombre=$1, correo=$2 WHERE idUsuario=$3 RETURNING *"
+        const values = [datos.nombre,datos.correo,id];
+        const result = await pool.query(consulta,values);
+        return result.rows[0];
+    } catch (error) {
+        throw{
+            code:error.code || 500,
+            message:error.message || "Error al actualizar perfil"
+        };
+    }
+}
+const actualizarPasswordBD = async(id,password) =>{
+    try {
+        const passwordEncriptada = bcrypt.hashSync(password);
+        const consulta = "UPDATE Usuarios SET password=$1 WHERE idUsuario=$2 RETURNING nombre, correo"
+        const values = [passwordEncriptada,id];
+        const result = await pool.query(consulta,values);
+        return result.rows[0];
+    } catch (error) {
+        throw{
+            code:error.code ||500,
+            message: error.message || "Error al actualizar la contraseña"
+        }
+    }
+}
 module.exports = {
     verificarCredencialesBD,
-    registrarUsuarioBD
+    registrarUsuarioBD,
+    actualizarDatosBD,
+    actualizarPasswordBD
 }

@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const {verificarCredencialesBD,registrarUsuarioBD} =require("../models/authModels.js")
+const {verificarCredencialesBD,registrarUsuarioBD,actualizarDatosBD, actualizarPasswordBD} =require("../models/authModels.js")
 
 
 const login = async(req, res) => {
@@ -34,7 +34,29 @@ const register = async(req,res) => {
         res.status(500).send(error);
     }
 }
+const actualizarPerfil = async(req,res) => {
+    try {
+        const {id} = req.params;
+        const datos =  req.body;
+        if(datos.tipo === 'datos'){
+            const perfil = await actualizarDatosBD(id,datos);
+            res.status(200).json(perfil);
+        }
+        else if(datos.tipo === 'password'){
+            if(datos.password !== datos.confirmPass){
+                return res.status.json({error: "Las contraseñas no coinciden"});
+            }
+            const perfil = await actualizarPasswordBD(id, datos.password);
+            res.status(200).json(perfil);
+        }
+    } catch (error) {
+        res.status(error.code || 500).json({
+            error: error.message
+        });
+    }
+}
 module.exports={
     login,
-    register
+    register,
+    actualizarPerfil
 }

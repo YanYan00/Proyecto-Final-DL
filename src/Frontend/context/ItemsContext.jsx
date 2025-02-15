@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 export const ItemsContext = createContext();
 const ItemsProvider = ({children})=>{     
     const [items,setItems] = useState([]);
-    const [perfil,setPerfil] = useState(null);
     const navigate = useNavigate(); 
 
     const consultarBD = async () => {
@@ -16,21 +15,6 @@ const ItemsProvider = ({children})=>{
             console.error("Error:", error);
         }
     };
-    
-    const obtenerPerfilBD = async (id) => {
-        try {
-            const token = localStorage.getItem('token');
-            const response = await fetch(`http://localhost:3000/api/profile/${id}`,{
-                headers:{
-                    'Authorization': `Bearer ${token}`}});
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);}          
-            const data = await response.json();
-            setPerfil(data);
-        } catch (error) {
-            console.error("Error:", error);
-        }
-    }
     const agregarPublicacionBD = async (publicacionData, token) => {
         try {
             const response = await fetch('http://localhost:3000/api/publicacion',{
@@ -69,7 +53,7 @@ const ItemsProvider = ({children})=>{
     }, []);
 
     return(
-        <ItemsContext.Provider value={{items,perfil,consultarBD,agregarPublicacionBD,obtenerPerfilBD}}>
+        <ItemsContext.Provider value={{items,consultarBD,agregarPublicacionBD,}}>
             {children}
         </ItemsContext.Provider>
     )
