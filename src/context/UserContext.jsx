@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+const API_URL = import.meta.env.VITE_BACKEND_URL;
 
 export const UserContext = createContext();
 const UserProvider = ({children}) => {
@@ -26,7 +27,7 @@ const UserProvider = ({children}) => {
                 password: password
             };
     
-            const response = await fetch('http://localhost:3000/api/login', {
+            const response = await fetch(`${API_URL}/api/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -73,7 +74,7 @@ const UserProvider = ({children}) => {
 //----------------------------------------Register--------------------------------------------------
     const register = async (nombre,email, password) =>{
         try {
-            const response = await fetch('http://localhost:3000/api/register',{
+            const response = await fetch(`${API_URL}/api/register`,{
                 method: 'POST',
                 headers:{
                     "Content-Type":"application/json"
@@ -112,7 +113,7 @@ const UserProvider = ({children}) => {
     const obtenerPerfilBD = async (id) => {
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`http://localhost:3000/api/profile/${id}`,{
+            const response = await fetch(`${API_URL}/api/profile/${id}`,{
                 headers:{
                     'Authorization': `Bearer ${token}`}});
             if (!response.ok) {
@@ -134,7 +135,7 @@ const UserProvider = ({children}) => {
                 ...datos,
                 tipo:datos.password ? 'password' : 'datos'
             }
-            const response = await fetch(`http://localhost:3000/api/profile/${id}`,{
+            const response = await fetch(`${API_URL}/api/profile/${id}`,{
                 method: 'PUT',
                 headers: {
                     'Content-Type':'application/json',

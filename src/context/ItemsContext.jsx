@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+const API_URL = import.meta.env.VITE_BACKEND_URL;
 
 export const ItemsContext = createContext();
 const ItemsProvider = ({children})=>{     
@@ -9,7 +10,7 @@ const ItemsProvider = ({children})=>{
 
     const consultarBD = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/productos');
+            const response = await fetch(`${API_URL}/api/productos`);
             const data = await response.json();
             setItems(data);
         } catch (error) {
@@ -18,7 +19,7 @@ const ItemsProvider = ({children})=>{
     };
     const obtenerCategoriasBD = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/categorias');
+            const response = await fetch(`${API_URL}:3000/api/categorias`);
             const data = await response.json();
             setCategorias(data);
         } catch (error) {
@@ -27,7 +28,7 @@ const ItemsProvider = ({children})=>{
     };
     const agregarPublicacionBD = async (publicacionData, token) => {
         try {
-            const response = await fetch('http://localhost:3000/api/publicacion',{
+            const response = await fetch(`${API_URL}/api/publicacion`,{
                 method: 'POST',
                 headers:{
                     "Content-Type":"application/json",
