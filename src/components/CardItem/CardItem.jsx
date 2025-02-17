@@ -13,7 +13,7 @@ const CardItem = ({item, añadirItem}) => {
                 <Card.Text>{item.descripcion}</Card.Text>
                 <Card.Text>Valor: ${item.precio}</Card.Text>
                 <Card.Text>Stock: {item.stock}</Card.Text>
-                <Card.Text>Categoria: {item.idcategoria}</Card.Text>
+                <Card.Text>Categoria: {item.categoria}</Card.Text>
                 <Button variant="primary" onClick={() => añadirItem(item)}>+</Button>
                 <Button variant="primary">guardar</Button>
             </Card.Body>

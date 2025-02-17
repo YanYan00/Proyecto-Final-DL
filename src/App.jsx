@@ -1,13 +1,13 @@
 import './App.css'
 import { BrowserRouter, Route , Routes } from 'react-router-dom'
-import Home from './Frontend/views/Home/Home'
-import LoginPage from './Frontend/views/LoginPage/LoginPage.jsx'
-import Navbar from './Frontend/components/Navbar/Navbar.jsx'
-import RegisterPage from './Frontend/views/RegisterPage/RegisterPage.jsx'
-import Cart from './Frontend/views/Cart/Cart.jsx'
-import Posts from './Frontend/views/Posts/Posts.jsx'
-import NewPost from './Frontend/views/NewPost/NewPost.jsx'
-import Profile from './Frontend/views/Profile/Profile.jsx'
+import Home from './views/Home/Home'
+import LoginPage from './views/LoginPage/LoginPage.jsx'
+import Navbar from './components/Navbar/Navbar.jsx'
+import RegisterPage from './views/RegisterPage/RegisterPage.jsx'
+import Cart from './views/Cart/Cart.jsx'
+import Posts from './views/Posts/Posts.jsx'
+import NewPost from './views/NewPost/NewPost.jsx'
+import Profile from './views/Profile/Profile.jsx'
 function App() {
   return (
     <>

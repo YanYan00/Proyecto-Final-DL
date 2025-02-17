@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 export const ItemsContext = createContext();
 const ItemsProvider = ({children})=>{     
     const [items,setItems] = useState([]);
+    const [categorias,setCategorias] = useState([]);
     const navigate = useNavigate(); 
 
     const consultarBD = async () => {
@@ -11,6 +12,15 @@ const ItemsProvider = ({children})=>{
             const response = await fetch('http://localhost:3000/api/productos');
             const data = await response.json();
             setItems(data);
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    };
+    const obtenerCategoriasBD = async () => {
+        try {
+            const response = await fetch('http://localhost:3000/api/categorias');
+            const data = await response.json();
+            setCategorias(data);
         } catch (error) {
             console.error("Error:", error);
         }
@@ -50,10 +60,11 @@ const ItemsProvider = ({children})=>{
 
     useEffect(() => {
         consultarBD();
+        obtenerCategoriasBD();
     }, []);
 
     return(
-        <ItemsContext.Provider value={{items,consultarBD,agregarPublicacionBD,}}>
+        <ItemsContext.Provider value={{items,categorias,consultarBD,agregarPublicacionBD,}}>
             {children}
         </ItemsContext.Provider>
     )
