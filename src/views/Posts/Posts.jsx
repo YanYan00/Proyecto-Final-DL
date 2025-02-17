@@ -8,7 +8,7 @@ const Posts = () =>{
     const {agregarPublicacion} = useContext(ItemsContext);
     const navigate = useNavigate();
     const handleNavigate = () => {
-        navigate('/nanomarket/newposts');
+        navigate('/newposts');
     };
     return (
         <>

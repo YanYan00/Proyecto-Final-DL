@@ -53,7 +53,7 @@ const ItemsProvider = ({children})=>{
         e.preventDefault();
         try {
             await agregarPublicacion({...data,precio: parseInt(data.precio),stock: parseInt(data.stock),idCategoria: parseInt(data.idCategoria)})
-            navigate('/nanomarket/posts');
+            navigate('/posts');
         } catch (error) {
             console.log('Error en creacion de la publicacion',error);
         }

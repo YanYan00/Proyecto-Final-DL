@@ -58,7 +58,7 @@ const UserProvider = ({children}) => {
         e.preventDefault();
         try {
             await login(loginData.email, loginData.password);
-            navigate("/nanomarket");
+            navigate("/");
         } catch (error) {
             console.error('Error en el login:', error);
         }
@@ -69,7 +69,7 @@ const UserProvider = ({children}) => {
         setToken(null);
         setEmail(null);
         setId(null);
-        navigate('/nanomarket');
+        navigate('/');
     }
 //----------------------------------------Register--------------------------------------------------
     const register = async (nombre,email, password) =>{
@@ -103,7 +103,7 @@ const UserProvider = ({children}) => {
             }
             await register(registerData.nombre, registerData.email, registerData.password);
             await login(registerData.email, registerData.password);
-            navigate("/nanomarket");
+            navigate("/");
         } catch (error) {
             alert(error.message);
             console.error('Error en el registro:', error);
