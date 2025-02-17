@@ -13,13 +13,13 @@ function App() {
     <>
       <Navbar></Navbar>
       <Routes>
-        <Route path='/nanomarket' element={<Home></Home>}></Route>
-        <Route path='/nanomarket/login' element={<LoginPage></LoginPage>}></Route>
-        <Route path='/nanomarket/register' element={<RegisterPage></RegisterPage>}></Route>
-        <Route path='/nanomarket/cart' element={<Cart></Cart>}></Route>
-        <Route path='/nanomarket/posts' element={<Posts></Posts>}></Route>
-        <Route path='/nanomarket/newpost' element={<NewPost></NewPost>}></Route>
-        <Route path='/nanomarket/profile' element={<Profile></Profile>}></Route>
+        <Route path='/' element={<Home></Home>}></Route>
+        <Route path='/login' element={<LoginPage></LoginPage>}></Route>
+        <Route path='/register' element={<RegisterPage></RegisterPage>}></Route>
+        <Route path='/cart' element={<Cart></Cart>}></Route>
+        <Route path='/posts' element={<Posts></Posts>}></Route>
+        <Route path='/newpost' element={<NewPost></NewPost>}></Route>
+        <Route path='/profile' element={<Profile></Profile>}></Route>
       </Routes>
     </>
   )
