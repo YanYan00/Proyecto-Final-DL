@@ -16,7 +16,7 @@ const ItemsProvider = ({children})=>{
     };
     const obtenerCategoriasBD = async () => {
         try {
-            const response = await fetch(`${API_URL}:3000/api/categorias`);
+            const response = await fetch(`${API_URL}/api/categorias`);
             const data = await response.json();
             setCategorias(data);
         } catch (error) {
