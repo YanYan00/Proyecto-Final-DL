@@ -29,7 +29,7 @@ const ItemsProvider = ({children})=>{
     }, []);
 
     return(
-        <ItemsContext.Provider value={{items,categorias,consultarBD,agregarPublicacionBD,}}>
+        <ItemsContext.Provider value={{items,categorias,consultarBD,}}>
             {children}
         </ItemsContext.Provider>
     )
