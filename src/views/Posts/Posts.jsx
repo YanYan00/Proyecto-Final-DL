@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 
 const Posts = () =>{
-    const {id,obtenerPublicacionesBD,posts} = useContext(UserContext);
+    const {id,token,obtenerPublicacionesBD,posts} = useContext(UserContext);
     useEffect(() =>{
         if(id && token){
             obtenerPublicacionesBD(id);
