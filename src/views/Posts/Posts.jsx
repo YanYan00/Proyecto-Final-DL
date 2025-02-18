@@ -1,33 +1,44 @@
 import { Button } from 'react-bootstrap';
 import './Posts.css';
-import { useContext } from 'react';
-import { ItemsContext } from '../../context/ItemsContext';
+import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../context/UserContext';
 
 const Posts = () =>{
-    const {agregarPublicacion} = useContext(ItemsContext);
-    const navigate = useNavigate();
-    const handleNavigate = () => {
-        navigate('/newposts');
-    };
+    const {id,obtenerPublicacionesBD,posts} = useContext(UserContext);
+    useEffect(() =>{
+        if(id && token){
+            obtenerPublicacionesBD(id);
+        }
+    },[id,token]);
+    if (!posts || posts.length === 0) {
+        return (
+            <div className='op-publicaciones'>
+                <h3>Mis publicaciones</h3>
+                <Button >Nueva publicación</Button>
+                <p>No tienes publicaciones aún</p>
+            </div>
+        );
+    }
     return (
         <>
             <div className='op-publicaciones'>
                 <h3>Mis publicaciones</h3>
-                <Button onClick={handleNavigate}>Nueva publicación</Button>
+                <Button>Nueva publicación</Button>
             </div>
-            {/* 
-                <div className='publicaciones'>
-                    {publicaciones.map((item,index) => (
-                        <div key={index} className='publicacion'>
-                            <div className='cont-publicacion'>
-                                <h4>{item.nombre}, ${item.precio.toLocaleString()}</h4>
-                            </div>
+            <div className='publicaciones'>
+                {posts.map((item) => (
+                    <div key={item.idpublicacion} className='publicacion'>
+                        <div className='cont-publicacion'>
+                            <h4>{item.titulo}</h4>
+                            <p>${item.precio.toLocaleString()}</p>
+                            <p>{item.descripcion}</p>
+                            <p>Fecha: {new Date(item.fechacrea).toLocaleDateString()}</p>
                         </div>
-                    ))}
-                </div>
-            */} 
-        </>    
+                    </div>
+                ))}
+            </div>
+        </>
     )
 }
 export default Posts;

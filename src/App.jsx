@@ -6,7 +6,6 @@ import Navbar from './components/Navbar/Navbar.jsx'
 import RegisterPage from './views/RegisterPage/RegisterPage.jsx'
 import Cart from './views/Cart/Cart.jsx'
 import Posts from './views/Posts/Posts.jsx'
-import NewPost from './views/NewPost/NewPost.jsx'
 import Profile from './views/Profile/Profile.jsx'
 function App() {
   return (
@@ -18,7 +17,6 @@ function App() {
         <Route path='/register' element={<RegisterPage></RegisterPage>}></Route>
         <Route path='/cart' element={<Cart></Cart>}></Route>
         <Route path='/posts' element={<Posts></Posts>}></Route>
-        <Route path='/newpost' element={<NewPost></NewPost>}></Route>
         <Route path='/profile' element={<Profile></Profile>}></Route>
       </Routes>
     </>

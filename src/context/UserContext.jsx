@@ -8,6 +8,7 @@ const UserProvider = ({children}) => {
     const [token, setToken] = useState(null);
     const [id, setId] = useState(null);
     const [perfil,setPerfil] = useState(null);
+    const [posts,setPosts] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -154,8 +155,58 @@ const UserProvider = ({children}) => {
             throw error;
         }
     }
+//--------------------------------Publicaciones-----------------------------------------------------------------
+    
+    const obtenerPublicacionesBD = async (id) =>{
+        try {
+            const token = localStorage.getItem('token');
+            const response = await fetch(`${API_URL}/api/publicaciones/${id}`,{
+                headers:{
+                    'Authorization': `Bearer ${token}`
+            }});
+            if(!response.ok){
+                throw new Error (`HTTP error! status: ${response.status}`)
+            }
+            const data = await response.json();
+            setPosts(data);
+        } catch (error) {
+            console.error("Error:",error);            
+        }
+    }
+    const agregarPublicacionBD = async (publicacionData, token) => {
+        try {
+            const response = await fetch(`${API_URL}/api/publicaciones`,{
+                method: 'POST',
+                headers:{
+                    "Content-Type":"application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    sku,
+                    descripcion,
+                    precio,
+                    stock,
+                    nombre,
+                    fechaCreacion,
+                    idCategoria
+                }),
+            });
+            const data = await response.json();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    const handleSubmitNew = async (e,data) => {
+        e.preventDefault();
+        try {
+            await agregarPublicacion({...data,precio: parseInt(data.precio),stock: parseInt(data.stock),idCategoria: parseInt(data.idCategoria)})
+            navigate('/posts');
+        } catch (error) {
+            console.log('Error en creacion de la publicacion',error);
+        }
+    }
     return(
-        <UserContext.Provider value={{token,email,id,perfil,login,register,logout, handleRegisterSubmit,handleLoginSubmit,obtenerPerfilBD,actualizarPerfilBD}}>
+        <UserContext.Provider value={{token,email,id,perfil,posts,login,register,logout, handleRegisterSubmit,handleLoginSubmit,obtenerPerfilBD,actualizarPerfilBD,obtenerPublicacionesBD}}>
             {children}
         </UserContext.Provider>
     )
