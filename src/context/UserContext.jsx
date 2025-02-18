@@ -160,7 +160,7 @@ const UserProvider = ({children}) => {
     const obtenerPublicacionesBD = async (id) =>{
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`${API_URL}/api/publicaciones/${id}`,{
+            const response = await fetch(`${API_URL}/api/posts/${id}`,{
                 headers:{
                     'Authorization': `Bearer ${token}`
             }});
@@ -175,7 +175,7 @@ const UserProvider = ({children}) => {
     }
     const agregarPublicacionBD = async (publicacionData, token) => {
         try {
-            const response = await fetch(`${API_URL}/api/publicaciones`,{
+            const response = await fetch(`${API_URL}/api/posts`,{
                 method: 'POST',
                 headers:{
                     "Content-Type":"application/json",
