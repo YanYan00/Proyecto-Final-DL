@@ -42,7 +42,6 @@ const Profile = () => {
           alert("Todos los campos son requeridos");
           return;
         }}
-
       else if(typeEditing === "contraseña"){
         if(!formData.password || !formData.confirmPass){
           alert("La contraseña es requerida");

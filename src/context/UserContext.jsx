@@ -173,7 +173,27 @@ const UserProvider = ({children}) => {
             console.error("Error:",error);            
         }
     }
-    const agregarPublicacionBD = async (publicacionData, token) => {
+    const agregarProductoBD = async (productoData) =>{
+        try {
+            const response = await fetch(`${API_URL}/api/productos`,{
+                method: 'POST',
+                headers:{
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                    
+                },
+                body: JSON.stringify(productoData)
+            });
+            if(!response.ok){
+                throw new Error("Error al crear el producto");
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('Error:',error);
+            throw error;
+        }
+    }
+    const agregarPublicacionBD = async (publicacionData) => {
         try {
             const response = await fetch(`${API_URL}/api/posts`,{
                 method: 'POST',
@@ -181,32 +201,21 @@ const UserProvider = ({children}) => {
                     "Content-Type":"application/json",
                     "Authorization": `Bearer ${token}`
                 },
-                body: JSON.stringify({
-                    sku,
-                    descripcion,
-                    precio,
-                    stock,
-                    nombre,
-                    fechaCreacion,
-                    idCategoria
-                }),
+                body: JSON.stringify(publicacionData),
             });
+            if(!response.ok){
+                throw new Error("Error al crear publicacion")
+            }
             const data = await response.json();
+            await obtenerPublicacionesBD(id);
+            return data;
         } catch (error) {
             console.log(error);
-        }
-    }
-    const handleSubmitNew = async (e,data) => {
-        e.preventDefault();
-        try {
-            await agregarPublicacion({...data,precio: parseInt(data.precio),stock: parseInt(data.stock),idCategoria: parseInt(data.idCategoria)})
-            navigate('/posts');
-        } catch (error) {
-            console.log('Error en creacion de la publicacion',error);
+            throw error;
         }
     }
     return(
-        <UserContext.Provider value={{token,email,id,perfil,posts,login,register,logout, handleRegisterSubmit,handleLoginSubmit,obtenerPerfilBD,actualizarPerfilBD,obtenerPublicacionesBD}}>
+        <UserContext.Provider value={{token,email,id,perfil,posts,login,register,logout, handleRegisterSubmit,handleLoginSubmit,obtenerPerfilBD,actualizarPerfilBD,obtenerPublicacionesBD,agregarPublicacionBD,agregarProductoBD}}>
             {children}
         </UserContext.Provider>
     )
