@@ -50,7 +50,7 @@ const Posts = () =>{
                 precio:parseInt(formData.precio),
                 idUsuario:id,
                 idCategoria:parseInt(formData.idCategoria),
-                idProducto: producto.idProducto
+                idProducto: producto.idproducto
             }
             await agregarPublicacionBD(publicacionData)
             setFormData({
