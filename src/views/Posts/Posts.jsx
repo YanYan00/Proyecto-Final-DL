@@ -3,10 +3,11 @@ import './Posts.css';
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../context/UserContext';
 import { ItemsContext } from '../../context/ItemsContext';
-
+import { useNavigate } from 'react-router-dom';
 const Posts = () =>{
     const {id,token,obtenerPublicacionesBD,posts,agregarPublicacionBD,agregarProductoBD} = useContext(UserContext);
     const {categorias} = useContext(ItemsContext);
+    const navigate = useNavigate();
     const [isCreating, setIsCreating] = useState(false);
     const [formData,setFormData] = useState({
         nombre:'',
@@ -63,6 +64,8 @@ const Posts = () =>{
             })
             setIsCreating(false);
             await obtenerPublicacionesBD(id);
+            await consultarBD();
+            navigate('/');
         } catch (error) {
             console.error("Error al crear la publicacion",error);
             alert("Hubo un error al crear la publicacion");
