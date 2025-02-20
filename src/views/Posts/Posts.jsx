@@ -6,6 +6,7 @@ import { ItemsContext } from '../../context/ItemsContext';
 import { useNavigate } from 'react-router-dom';
 const Posts = () =>{
     const {id,token,obtenerPublicacionesBD,posts,agregarPublicacionBD,agregarProductoBD} = useContext(UserContext);
+    const {consultarBD} = useContext(ItemsContext);
     const {categorias} = useContext(ItemsContext);
     const navigate = useNavigate();
     const [isCreating, setIsCreating] = useState(false);
