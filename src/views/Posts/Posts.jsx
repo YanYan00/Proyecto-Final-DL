@@ -266,7 +266,7 @@ const Posts = () =>{
         <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
             <h3 className="text-2xl font-bold mb-4">{isEditing ? 'Editar Publicacion' : 'Mis publicaciones'}</h3>
             {(isCreating || isEditing) ?
-                renderDeleting() : renderPublications()
+                renderForm() : renderPublications()
             }
         </div>
     );
