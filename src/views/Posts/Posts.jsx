@@ -1,4 +1,3 @@
-import { Button } from 'react-bootstrap';
 import './Posts.css';
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../context/UserContext';
@@ -11,7 +10,7 @@ const Posts = () =>{
     const [isEditing, setIsEditing] = useState(false);
     const [postsIds,setPostsIds] = useState({
         publicacionId:null,
-        productoId
+        productoId:null
     })
     const [formData,setFormData] = useState({
         nombre:'',
