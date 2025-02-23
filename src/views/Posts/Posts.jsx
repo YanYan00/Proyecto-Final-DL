@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../context/UserContext';
 import { ItemsContext } from '../../context/ItemsContext';
 const Posts = () =>{
-    const {id,token,obtenerPublicacionesBD,posts,agregarPublicacionBD,agregarProductoBD} = useContext(UserContext);
+    const {id,token,obtenerProductoBD,obtenerPublicacionesBD,posts,agregarPublicacionBD,agregarProductoBD} = useContext(UserContext);
     const {consultarBD} = useContext(ItemsContext);
     const {categorias} = useContext(ItemsContext);
     const [isCreating, setIsCreating] = useState(false);
@@ -92,14 +92,15 @@ const Posts = () =>{
             alert(`Hubo un error al ${isEditing ? 'actualizar' : 'crear'}  la publicacion`);
         }
     }
-    const handleEdit = (item) =>{
+    const handleEdit = async (item) =>{
+        const producto = await obtenerProductoBD(item.idproducto);
         setPostsIds({
             publicacionId: item.idpublicacion,
             productoId: item.idproducto
         })
         setFormData({
-            nombre: item.nombre,
-            stock: item.stock,
+            nombre: producto.nombre,
+            stock: producto.stock,
             titulo: item.titulo,
             descripcion: item.descripcion,
             precio: item.precio,

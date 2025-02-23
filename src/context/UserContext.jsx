@@ -157,6 +157,22 @@ const UserProvider = ({children}) => {
     }
 //--------------------------------Publicaciones-----------------------------------------------------------------
     
+    const obtenerProductoBD = async (idProducto) =>{
+        try {
+            const token = localStorage.getItem('token');
+            const response = await fetch(`${API_URL}/api/productos/${idProducto}`,{
+                headers:{
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            if(!response.ok){
+                throw new Error('Error al obtener el producto')
+            }
+            return await response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
     const obtenerPublicacionesBD = async (id) =>{
         try {
             const token = localStorage.getItem('token');
@@ -175,6 +191,7 @@ const UserProvider = ({children}) => {
     }
     const agregarProductoBD = async (productoData) =>{
         try {
+            const token = localStorage.getItem('token');
             const response = await fetch(`${API_URL}/api/productos`,{
                 method: 'POST',
                 headers:{
@@ -195,6 +212,7 @@ const UserProvider = ({children}) => {
     }
     const agregarPublicacionBD = async (publicacionData) => {
         try {
+            const token = localStorage.getItem('token');
             const response = await fetch(`${API_URL}/api/posts`,{
                 method: 'POST',
                 headers:{
@@ -215,7 +233,7 @@ const UserProvider = ({children}) => {
         }
     }
     return(
-        <UserContext.Provider value={{token,email,id,perfil,posts,login,register,logout, handleRegisterSubmit,handleLoginSubmit,obtenerPerfilBD,actualizarPerfilBD,obtenerPublicacionesBD,agregarPublicacionBD,agregarProductoBD}}>
+        <UserContext.Provider value={{token,email,id,perfil,posts,login,register,logout, handleRegisterSubmit,handleLoginSubmit,obtenerPerfilBD,actualizarPerfilBD,obtenerProductoBD,obtenerPublicacionesBD,agregarPublicacionBD,agregarProductoBD}}>
             {children}
         </UserContext.Provider>
     )
