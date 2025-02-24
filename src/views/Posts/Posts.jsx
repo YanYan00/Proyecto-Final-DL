@@ -112,8 +112,11 @@ const Posts = () =>{
         const confirmar = window.confirm('¿Estás seguro que quieres eliminar esta publicación')
         if(confirmar){
             try {
-                await eliminarPublicacionBD(publicacionId);
-                await eliminarProductoBD(productoId);
+                console.log('Iniciando eliminación - PublicacionId:', publicacionId, 'ProductoId:', productoId);
+                const publicacionEliminada = await eliminarPublicacionBD(publicacionId);
+                console.log('Publicación eliminada:', publicacionEliminada);
+                const productoEliminado = await eliminarProductoBD(productoId);
+                console.log('Producto eliminado:', productoEliminado);
                 await obtenerPublicacionesBD(id);
                 await consultarBD();
             } catch (error) {
