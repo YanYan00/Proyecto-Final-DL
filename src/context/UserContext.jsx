@@ -232,8 +232,82 @@ const UserProvider = ({children}) => {
             throw error;
         }
     }
+    const editarProductoBD = async(id,productData) =>{
+        try {
+            const token = localStorage.getItem('token');
+            const response = await fetch(`${API_URL}/api/productos/${id}`,{
+                method: 'PUT',
+                headers:{
+                    "Content-Type":"application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify(productData)
+            });
+            if(!response.ok){
+                throw new Error("Error al editar el producto");
+            }
+            return await response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
+    const editarPublicacionBD = async(id,postData) =>{
+        try {
+            const token = localStorage.getItem('token');
+            const response = await fetch(`${API_URL}/api/posts/${id}`,{
+                method:'PUT',
+                headers:{
+                    "Content-Type":"application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify(postData)
+            });
+            if(!response.ok){
+                throw new Error("Error al editar la publicación");
+            }
+            return await response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
+    const eliminarProductoBD = async (id)=>{
+        try {
+            const token = localStorage.getItem('token');
+            const response = await fetch(`${API_URL}/api/productos/${id}`,{
+                method: 'DELETE',
+                headers:{
+                    "Content-Type":"application/json",
+                    "Authorization":`Bearer ${token}`
+                }
+            });
+            if(!response.ok){
+                throw new Error("Error al eliminar producto");
+            }
+            return await response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
+    const eliminarPublicacionBD = async (id)=>{
+        try {
+            const token = localStorage.getItem('token');
+            const response = await fetch(`${API_URL}/api/posts/${id}`,{
+                method: 'DELETE',
+                headers:{
+                    "Content-Type":"application/json",
+                    "Authorization":`Bearer ${token}`
+                }
+            });
+            if(!response.ok){
+                throw new Error("Error al eliminar publicacion");
+            }
+            return await response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
     return(
-        <UserContext.Provider value={{token,email,id,perfil,posts,login,register,logout, handleRegisterSubmit,handleLoginSubmit,obtenerPerfilBD,actualizarPerfilBD,obtenerProductoBD,obtenerPublicacionesBD,agregarPublicacionBD,agregarProductoBD}}>
+        <UserContext.Provider value={{token,email,id,perfil,posts,login,register,logout, handleRegisterSubmit,handleLoginSubmit,obtenerPerfilBD,actualizarPerfilBD,obtenerProductoBD,obtenerPublicacionesBD,agregarPublicacionBD,agregarProductoBD,editarProductoBD,editarPublicacionBD,eliminarProductoBD,eliminarPublicacionBD}}>
             {children}
         </UserContext.Provider>
     )

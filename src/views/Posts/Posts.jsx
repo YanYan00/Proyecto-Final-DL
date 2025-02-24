@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../context/UserContext';
 import { ItemsContext } from '../../context/ItemsContext';
 const Posts = () =>{
-    const {id,token,obtenerProductoBD,obtenerPublicacionesBD,posts,agregarPublicacionBD,agregarProductoBD} = useContext(UserContext);
+    const {id,token,obtenerProductoBD,obtenerPublicacionesBD,posts,agregarPublicacionBD,agregarProductoBD,editarProductoBD,editarPublicacionBD,eliminarProductoBD,eliminarPublicacionBD} = useContext(UserContext);
     const {consultarBD} = useContext(ItemsContext);
     const {categorias} = useContext(ItemsContext);
     const [isCreating, setIsCreating] = useState(false);
@@ -40,14 +40,14 @@ const Posts = () =>{
                 return;
             }
             if(isEditing){
-                await actualizarProductosBD(postsIds.productoId,{
+                await editarProductoBD(postsIds.productoId,{
                     nombre: formData.nombre,
                     descripcion: formData.descripcion,
                     precio: parseInt(formData.precio),
                     stock: parseInt(formData.stock),
                     idCategoria: parseInt(formData.idCategoria)
                 });
-                await actualizarPublicacionBD(postsIds.publicacionId,{
+                await editarPublicacionBD(postsIds.publicacionId,{
                     titulo: formData.titulo,
                     descripcion: formData.descripcion,
                     precio: parseInt(formData.precio),
@@ -112,8 +112,8 @@ const Posts = () =>{
         const confirmar = window.confirm('¿Estás seguro que quieres eliminar esta publicación')
         if(confirmar){
             try {
-                await eliminarPublicacion(publicacionId);
-                await eliminarProducto(productoId);
+                await eliminarPublicacionBD(publicacionId);
+                await eliminarProductoBD(productoId);
                 await obtenerPublicacionesBD(id);
                 await consultarBD();
             } catch (error) {
