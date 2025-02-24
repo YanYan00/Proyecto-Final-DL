@@ -140,26 +140,33 @@ const Posts = () =>{
     }
     const renderPublications = () => (
         <div className='cont-publicaciones'>
-            <button onClick={() => setIsCreating(true)} className="w-full mb-4 bg-blue-500 text-white py-2 rounded">Nueva publicación</button>
+            <button onClick={() => setIsCreating(true)} className="w-full mb-4 bg-blue-500 text-white py-2 rounded">
+                Nueva publicación
+            </button>
             <div className="space-y-4">
                 {posts.map((item) => (
                     <div key={item.idpublicacion} className="border p-4 rounded">
-                        {item.urlImagen && (
+                        {item.urlimagen && (
                             <img 
-                                src={item.urlImagen} 
-                                alt={item.nombre}
+                                src={item.urlimagen}
+                                alt={item.titulo}
                                 className="w-full h-48 object-cover mb-2 rounded"
+                                onError={(e) => {
+                                    console.log('Error cargando imagen:', item.urlimagen);
+                                    e.target.style.display = 'none';
+                                }}
                             />
                         )}
                         <h4 className="font-bold">{item.titulo}</h4>
                         <p className="text-gray-600">${item.precio.toLocaleString()}</p>
                         <p>{item.descripcion}</p>
-                        <button onClick={()=> handleEdit(item)}>Editar</button>
-                        <button onClick={()=> handleDelete(item.idpublicacion,item.idproducto)}>X</button>
-                    </div>))}
+                        <button onClick={() => handleEdit(item)}>Editar</button>
+                        <button onClick={() => handleDelete(item.idpublicacion, item.idproducto)}>X</button>
+                    </div>
+                ))}
             </div>
         </div>
-    )
+    );
     const renderForm = () => (
         <form onSubmit={handleSubmit}>
             <div className="mb-4">
