@@ -3,9 +3,10 @@ import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../context/UserContext';
 import { ItemsContext } from '../../context/ItemsContext';
 const Posts = () =>{
-    const {id,token,obtenerProductoBD,obtenerPublicacionesBD,posts,agregarPublicacionBD,agregarProductoBD,editarProductoBD,editarPublicacionBD,eliminarProductoBD,eliminarPublicacionBD} = useContext(UserContext);
+    const {id,token,obtenerProductoBD,obtenerPublicacionesBD,posts,agregarPublicacionBD,agregarProductoBD,subirImagenCloudinary,editarProductoBD,editarPublicacionBD,eliminarProductoBD,eliminarPublicacionBD} = useContext(UserContext);
     const {consultarBD} = useContext(ItemsContext);
     const {categorias} = useContext(ItemsContext);
+    const [previewUrl, setPreviewUrl] = useState(null);
     const [isCreating, setIsCreating] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const [postsIds,setPostsIds] = useState({
@@ -19,6 +20,8 @@ const Posts = () =>{
         descripcion:'',
         precio:'',
         idCategoria:'',
+        imagen: null,
+        urlImagen: ''
     })
     useEffect(() =>{
         if(id && token){
@@ -39,13 +42,18 @@ const Posts = () =>{
                 alert("Todos los campos son requeridos");
                 return;
             }
+            let imagenUrl = null;
+            if(formData.imagen){
+                imagenUrl = await subirImagenCloudinary(formData.imagen);
+            }
             if(isEditing){
                 await editarProductoBD(postsIds.productoId,{
                     nombre: formData.nombre,
                     descripcion: formData.descripcion,
                     precio: parseInt(formData.precio),
                     stock: parseInt(formData.stock),
-                    idCategoria: parseInt(formData.idCategoria)
+                    idCategoria: parseInt(formData.idCategoria),
+                    urlImagen: imagenUrl || formData.urlImagen
                 });
                 await editarPublicacionBD(postsIds.publicacionId,{
                     titulo: formData.titulo,
@@ -60,7 +68,8 @@ const Posts = () =>{
                     descripcion:formData.descripcion,
                     precio: parseInt(formData.precio),
                     stock: parseInt(formData.stock),
-                    idCategoria: parseInt(formData.idCategoria)
+                    idCategoria: parseInt(formData.idCategoria),
+                    urlImagen: imagenUrl
                 };
                 const producto = await agregarProductoBD(productoData);
 
@@ -80,8 +89,11 @@ const Posts = () =>{
                 descripcion:'',
                 precio:'',
                 idCategoria:'',
-                titulo:''
+                titulo:'',
+                imagen: null,
+                urlImagen:''
             })
+            setPreviewUrl(null);
             setIsEditing(false);
             setIsCreating(false);
             setPostsIds({publicacionId:null,productoId:null});
@@ -104,8 +116,10 @@ const Posts = () =>{
             titulo: item.titulo,
             descripcion: item.descripcion,
             precio: item.precio,
-            idCategoria: item.idcategoria
+            idCategoria: item.idcategoria,
+            urlImagen: producto.urlimagen
         })
+        setPreviewUrl(producto.urlImagen);
         setIsEditing(true);
     }
     const handleDelete = async (publicacionId,productoId) => {
@@ -130,6 +144,13 @@ const Posts = () =>{
             <div className="space-y-4">
                 {posts.map((item) => (
                     <div key={item.idpublicacion} className="border p-4 rounded">
+                        {item.urlImagen && (
+                            <img 
+                                src={item.urlImagen} 
+                                alt={item.nombre}
+                                className="w-full h-48 object-cover mb-2 rounded"
+                            />
+                        )}
                         <h4 className="font-bold">{item.titulo}</h4>
                         <p className="text-gray-600">${item.precio.toLocaleString()}</p>
                         <p>{item.descripcion}</p>
@@ -141,6 +162,38 @@ const Posts = () =>{
     )
     const renderForm = () => (
         <form onSubmit={handleSubmit}>
+            <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700">
+                    Imagen del producto
+                </label>
+                <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                        const file = e.target.files[0];
+                        if (file) {
+                            if (file.size > 5000000) {
+                                alert('La imagen es demasiado grande. Máximo 5MB');
+                                return;
+                            }
+                            setFormData(prev => ({...prev, imagen: file}));
+                            const reader = new FileReader();
+                            reader.onloadend = () => {
+                                setPreviewUrl(reader.result);
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    }}
+                    className="mt-1 block w-full"
+                />
+                {previewUrl && (
+                    <img 
+                        src={previewUrl}
+                        alt="Vista previa"
+                        className="mt-2 h-32 w-auto object-cover rounded"
+                    />
+                )}
+            </div>
             <div className="mb-4">
                 <label className="block mb-2">Título de la Publicación</label>
                 <input

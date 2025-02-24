@@ -232,6 +232,32 @@ const UserProvider = ({children}) => {
             throw error;
         }
     }
+    const subirImagenCloudinary = async (file) => {
+        try {
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('upload_preset', 'ml_default');
+            formData.append('cloud_name', 'djxkdulsx');
+
+            const response = await fetch(
+                `https://api.cloudinary.com/v1_1/djxkdulsx/image/upload`,
+                {
+                    method: 'POST',
+                    body: formData
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error('Error al subir la imagen');
+            }
+
+            const data = await response.json();
+            return data.secure_url;
+        } catch (error) {
+            console.error('Error subiendo imagen:', error);
+            throw error;
+        }
+    };
     const editarProductoBD = async(id,productData) =>{
         try {
             const token = localStorage.getItem('token');
@@ -307,7 +333,7 @@ const UserProvider = ({children}) => {
         }
     }
     return(
-        <UserContext.Provider value={{token,email,id,perfil,posts,login,register,logout, handleRegisterSubmit,handleLoginSubmit,obtenerPerfilBD,actualizarPerfilBD,obtenerProductoBD,obtenerPublicacionesBD,agregarPublicacionBD,agregarProductoBD,editarProductoBD,editarPublicacionBD,eliminarProductoBD,eliminarPublicacionBD}}>
+        <UserContext.Provider value={{token,email,id,perfil,posts,login,register,logout, handleRegisterSubmit,handleLoginSubmit,obtenerPerfilBD,actualizarPerfilBD,obtenerProductoBD,obtenerPublicacionesBD,agregarPublicacionBD,agregarProductoBD, subirImagenCloudinary,editarProductoBD,editarPublicacionBD,eliminarProductoBD,eliminarPublicacionBD}}>
             {children}
         </UserContext.Provider>
     )

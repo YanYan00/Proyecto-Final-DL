@@ -9,11 +9,15 @@ const CardItem = ({item, añadirItem}) => {
     return (
         <Card style={{ width: '18rem' }}>
             <Card.Body>
+                {item.urlimagen && (
+                    <img 
+                        src={item.urlimagen} 
+                        alt={item.nombre}
+                        className="w-full h-48 object-cover rounded-t"
+                    />
+                )}
                 <Card.Title>{item.nombre}</Card.Title>
-                <Card.Text>{item.descripcion}</Card.Text>
                 <Card.Text>Valor: ${item.precio}</Card.Text>
-                <Card.Text>Stock: {item.stock}</Card.Text>
-                <Card.Text>Categoria: {item.categoria}</Card.Text>
                 <Button variant="primary" onClick={() => añadirItem(item)}>+</Button>
                 <Button variant="primary">guardar</Button>
             </Card.Body>
