@@ -72,12 +72,12 @@ const CartProvider = ({children}) => {
                         },
                         body: JSON.stringify({
                             idUsuario: id,
-                            idProducto: producto.idProducto,
+                            idProducto: producto.idproducto,
                             cantidad:1
                         })
                     })
                     if(response.ok){
-                        await obtenerCarritoRemoto();
+                        await obtenerCarritoRemoto(id);
                     }
                 }
             } catch (error) {
