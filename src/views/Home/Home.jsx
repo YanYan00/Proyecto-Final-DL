@@ -64,7 +64,6 @@ const Home = () => {
       </div>
       <div className="cards">
         {mostrarItems.map((item,index)=>(
-          
           <CardItem item={item} key={index} añadirItem ={añadirItem}/>
         ))}
       </div>

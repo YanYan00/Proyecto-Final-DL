@@ -1,5 +1,5 @@
 import './App.css'
-import { BrowserRouter, Route , Routes } from 'react-router-dom'
+import {Route , Routes } from 'react-router-dom'
 import Home from './views/Home/Home'
 import LoginPage from './views/LoginPage/LoginPage.jsx'
 import Navbar from './components/Navbar/Navbar.jsx'
@@ -15,6 +15,7 @@ function App() {
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/login' element={<LoginPage></LoginPage>}></Route>
         <Route path='/register' element={<RegisterPage></RegisterPage>}></Route>
+        <Route path='/producto/:id' element={<DetalleProducto></DetalleProducto>}></Route>
         <Route path='/cart' element={<Cart></Cart>}></Route>
         <Route path='/posts' element={<Posts></Posts>}></Route>
         <Route path='/profile' element={<Profile></Profile>}></Route>

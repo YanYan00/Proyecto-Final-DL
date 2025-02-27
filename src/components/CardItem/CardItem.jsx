@@ -6,20 +6,29 @@ import Card from 'react-bootstrap/Card';
 import {useNavigate} from 'react-router-dom';
 
 const CardItem = ({item, añadirItem}) => {
+    const navigate = useNavigate();
+    const verDetalle = () =>{
+        navigate(`/producto/${item.idproducto}`);
+    }
+
     return (
-        <Card style={{ width: '18rem' }}>
-            <Card.Body>
+        <Card style={{ width: '18rem' }} onClick={verDetalle}>
+            <div className='card-img-cont'>
                 {item.urlimagen && (
-                    <img 
+                    <Card.Img 
+                        variant="top" 
                         src={item.urlimagen} 
                         alt={item.nombre}
-                        className="w-full h-48 object-cover rounded-t"
+                        style={{ objectFit: 'cover', height: '100%', width: '100%' }}
+                        onError={(e) => {
+                            e.target.src = 'https://via.placeholder.com/150?text=Sin+imagen';
+                        }}
                     />
                 )}
+            </div>   
+            <Card.Body>    
                 <Card.Title>{item.nombre}</Card.Title>
-                <Card.Text>Valor: ${item.precio}</Card.Text>
-                <Button variant="primary" onClick={() => añadirItem(item)}>+</Button>
-                <Button variant="primary">guardar</Button>
+                <Card.Text>{item.precio?.toLocaleString()}</Card.Text>
             </Card.Body>
         </Card>
     );
