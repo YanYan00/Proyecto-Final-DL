@@ -83,7 +83,9 @@ const UserProvider = ({children}) => {
                 body: JSON.stringify({
                     nombre,
                     email,
-                    password
+                    password,
+                    telefono,
+                    direccion
                 }),
             });
             const data = await response.json();
@@ -98,11 +100,15 @@ const UserProvider = ({children}) => {
     const handleRegisterSubmit = async (e, registerData) => {
         e.preventDefault();
         try {
+            if (!registerData.nombre || !registerData.email || !registerData.password || !registerData.confirmPassword || !registerData.telefono || !registerData.direccion) {
+                alert("Todos los campos son obligatorios");
+                return;
+              }
             if (registerData.password !== registerData.confirmPassword) {
                 alert("Las contraseñas no coinciden");
                 return;
             }
-            await register(registerData.nombre, registerData.email, registerData.password);
+            await register(registerData.nombre, registerData.email, registerData.password,registerData.telefono,registerData.direccion);
             await login(registerData.email, registerData.password);
             navigate("/");
         } catch (error) {
@@ -132,10 +138,16 @@ const UserProvider = ({children}) => {
                 console.error('Token no encontrado');
                 return;
             }
-            const dataEnviar ={
-                ...datos,
-                tipo:datos.password ? 'password' : 'datos'
+            let tipo = 'datos';
+            if (datos.tipo) {
+                tipo = datos.tipo;
+            } else if (datos.password) {
+                tipo = 'password';
             }
+            const dataEnviar = {
+                ...datos,
+                tipo: tipo
+            };
             const response = await fetch(`${API_URL}/api/profile/${id}`,{
                 method: 'PUT',
                 headers: {
