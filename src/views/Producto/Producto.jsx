@@ -47,9 +47,6 @@ const Producto = () =>{
     if(!producto){
         return <p>Cargando...</p>;
     }
-    console.log("ID Usuario:", idUsuario);
-    console.log("ID Usuario del producto:", producto?.idusuario);
-    console.log("¿Son del mismo tipo?", typeof idUsuario, typeof producto?.idusuario);
     const productoPropio = producto && producto.idusuario === parseInt(idUsuario);
     return (
         <Container>

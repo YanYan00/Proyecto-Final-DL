@@ -44,7 +44,7 @@ const RegisterPage = () => {
         <input
           type="tel"
           name="telefono"
-          placeholder="Teléfono (opcional)"
+          placeholder="Teléfono"
           value={data.telefono}
           onChange={handleChange}
           className="w-full p-2 mb-3 border rounded"
@@ -52,7 +52,7 @@ const RegisterPage = () => {
         />
         <textarea
           name="direccion"
-          placeholder="Dirección (opcional)"
+          placeholder="Dirección"
           value={data.direccion}
           onChange={handleChange}
           className="w-full p-2 mb-3 border rounded"
