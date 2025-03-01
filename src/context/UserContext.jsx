@@ -73,7 +73,7 @@ const UserProvider = ({children}) => {
         navigate('/');
     }
 //----------------------------------------Register--------------------------------------------------
-    const register = async (nombre,email, password) =>{
+    const register = async (nombre,email, password,telefono,direccion) =>{
         try {
             const response = await fetch(`${API_URL}/api/register`,{
                 method: 'POST',
