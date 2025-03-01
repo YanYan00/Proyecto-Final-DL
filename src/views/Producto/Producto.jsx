@@ -23,6 +23,7 @@ const Producto = () =>{
     },[id,items]);
     const handleAddToCart = async() =>{
         try {
+            if(!producto) return;
             await añadirItemBD(producto);
             alert('Producto añadido al carrito');
         } catch (error) {
@@ -52,14 +53,20 @@ const Producto = () =>{
         <Container>
             <Row>
                 <Col>
-                    {producto.urlimagen && (
+                    {producto.urlimagen ? (
                         <img
                             src={producto.urlimagen}
                             alt={producto.nombre}
-                            className="img-details"
+                            className="img-details w-100"
                             onError={(e) => {
                                 e.target.src = 'https://via.placeholder.com/400?text=Sin+imagen';
                             }}
+                        />
+                    ) : (
+                        <img
+                            src="https://via.placeholder.com/400?text=Sin+imagen"
+                            alt="Sin imagen"
+                            className="w-100"
                         />
                     )}
                 </Col>
