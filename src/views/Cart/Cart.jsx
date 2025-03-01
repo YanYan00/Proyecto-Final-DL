@@ -27,16 +27,11 @@ const Cart = () => {
     const itemsEnCarrito = items.filter(item => cartItems[item.idproducto]);
     if (itemsEnCarrito.length === 0) {
         return (
-            <Container className="py-5 text-center">
+            <div className="carro-vacio">
                 <h2>Tu carrito está vacío</h2>
                 <p>Agrega productos para comenzar a comprar</p>
-                <Button 
-                    variant="primary" 
-                    onClick={() => navigate('/')}
-                >
-                    Ir a la tienda
-                </Button>
-            </Container>
+                <button onClick={() => navigate('/')}>Ir a la tienda</button>
+            </div>
         );
     }
     return(
@@ -52,20 +47,8 @@ const Cart = () => {
                                 <p>{item.precio} x {cartItem.cantidad} = ${(item.precio * cartItem.cantidad).toFixed(2)}</p>
                             </div>
                             <div className="item-actions">
-                                <Button 
-                                    variant="outline-primary" 
-                                    size="sm"
-                                    onClick={() => añadirItemBD(item)}
-                                >
-                                    +
-                                </Button>
-                                <Button 
-                                    variant="outline-danger" 
-                                    size="sm"
-                                    onClick={() => eliminarItemBD(item)}
-                                >
-                                    -
-                                </Button>
+                                <button onClick={() => añadirItemBD(item)}>+</button>
+                                <button onClick={() => eliminarItemBD(item)}>-</button>
                             </div>
                         </div>
                     );
