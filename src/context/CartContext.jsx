@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState} from "react";
 import { UserContext } from "./UserContext";
+import { ItemsContext } from "./ItemsContext";
 const API_URL = import.meta.env.VITE_BACKEND_URL;
 
 export const CartContext = createContext();
@@ -7,7 +8,8 @@ export const CartContext = createContext();
 const CartProvider = ({children}) => {
     const [cart, setCart] = useState([]);
     const [total, setTotal] = useState(0);
-    const {id} = useContext(UserContext);
+    const {id,perfil} = useContext(UserContext);
+    const {items} = useContext(ItemsContext);
 
     useEffect(() => {
         if (id) {
@@ -88,7 +90,7 @@ const CartProvider = ({children}) => {
             localStorage.setItem('cart',JSON.stringify(carritoActualizado));
         }
     } 
-    const eliminarItemBD = async(producto,eliminarTodo = false)=>{
+    const eliminarItemBD = async(producto)=>{
         if(id){
             try {
                 const token = localStorage.getItem('token');
@@ -137,11 +139,26 @@ const CartProvider = ({children}) => {
                 alert('El carro está vacío, no puedes comprar.');
                 return null;
             }
-            
+            const itemsCompletos = cart.map(item => {
+                if (item.idusuario) {
+                    return item;
+                }
+                const productoCompleto = items.find(p => p.idproducto === item.idproducto);
+                return {
+                    ...item,
+                    idusuario: productoCompleto?.idusuario
+                };
+            });
             let response;
             
             if (id) {
                 const token = localStorage.getItem('token');
+                const userData = perfil ? {
+                    nombre: perfil.nombre,
+                    email: perfil.email,
+                    telefono: perfil.telefono,
+                    direccion: perfil.direccion
+                } : null;
                 response = await fetch(`${API_URL}/api/pedidos`, {
                     method: 'POST',
                     headers: {
@@ -149,9 +166,10 @@ const CartProvider = ({children}) => {
                         'Authorization': `Bearer ${token}`
                     },
                     body: JSON.stringify({
-                        idUsuario: id,
-                        items: cart,
-                        total
+                        idComprador: id,
+                        items: itemsCompletos,
+                        total,
+                        userInfo: userData
                     })
                 });
             } else {
@@ -166,7 +184,7 @@ const CartProvider = ({children}) => {
                     },
                     body: JSON.stringify({
                         comprador: datosComprador,
-                        items: cart,
+                        items: itemsCompletos,
                         total
                     })
                 });
@@ -206,7 +224,7 @@ const CartProvider = ({children}) => {
         }
     }
     return(
-        <CartContext.Provider value={{cart,total,añadirItemBD,eliminarItemBD,realizarCompra}}>
+        <CartContext.Provider value={{cart,total,añadirItemBD,eliminarItemBD,realizarCompra,vaciarCarrito}}>
             {children}
         </CartContext.Provider>
     )

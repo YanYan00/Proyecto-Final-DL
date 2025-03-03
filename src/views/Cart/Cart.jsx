@@ -1,6 +1,5 @@
 import './Cart.css';
 import React, { useContext, useState } from 'react';
-import { Button } from 'react-bootstrap';
 import { CartContext } from '../../context/CartContext';
 import { UserContext } from '../../context/UserContext.jsx';
 import { ItemsContext } from '../../context/ItemsContext.jsx';
