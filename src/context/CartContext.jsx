@@ -139,6 +139,11 @@ const CartProvider = ({children}) => {
                 alert('El carro está vacío, no puedes comprar.');
                 return null;
             }
+            console.log("ID del usuario:", id);
+            console.log("Perfil del usuario:", perfil);
+            console.log("Items disponibles:", items);
+            console.log("Carrito actual:", cart);
+            console.log("Datos de comprador:", datosComprador);
             const itemsCompletos = cart.map(item => {
                 if (item.idusuario) {
                     return item;
@@ -159,6 +164,15 @@ const CartProvider = ({children}) => {
                     telefono: perfil.telefono,
                     direccion: perfil.direccion
                 } : null;
+                console.log("Datos de usuario a enviar:", userData);
+                datosEnviados = {
+                    idComprador: id,
+                    items: itemsCompletos,
+                    total,
+                    userInfo: userData
+                };
+                
+                console.log("DATOS COMPLETOS A ENVIAR:", JSON.stringify(datosEnviados));
                 response = await fetch(`${API_URL}/api/pedidos`, {
                     method: 'POST',
                     headers: {
