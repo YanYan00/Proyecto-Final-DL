@@ -8,11 +8,12 @@ const Navbar = () => {
     return(
         <div className='navbar'>
             <div className='nav'>
-                <Link to="/"><h3>¡Bienvenido ${perfil.nombre}!</h3></Link>
-                <Link to="/cart" className="me-3"><Button variant="outline-light">🛒</Button></Link>
+                
                 
                 {token ? (
                         <>
+                            <Link to="/"><h3>¡Bienvenido ${perfil.nombre}!</h3></Link>
+                            <Link to="/cart" className="me-3"><Button variant="outline-light">🛒</Button></Link>
                             <Link to="/orders" className="me-3">
                                 <Button variant="outline-light">Mis pedidos</Button>
                             </Link>
@@ -24,6 +25,8 @@ const Navbar = () => {
                         </>
                     ) : (
                         <>
+                            <Link to="/"><h3>¡Bienvenido ${perfil.nombre}!</h3></Link>
+                            <Link to="/cart" className="me-3"><Button variant="outline-light">🛒</Button></Link>
                             <Link to="/login" className="me-3"><Button variant="warning">Iniciar Sesión</Button></Link>
                             <Link to="/register"><Button variant="warning">Registrarse</Button></Link>
                         </>
