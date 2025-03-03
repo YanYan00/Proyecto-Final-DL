@@ -160,7 +160,8 @@ const CartProvider = ({children}) => {
                 const productoCompleto = items.find(p => p.idproducto === item.idproducto);
                 return {
                     ...item,
-                    idusuario: productoCompleto?.idusuario
+                    idusuario: productoCompleto?.idusuario,
+                    precio: productoCompleto?.precio || item.precio
                 };
             });
             let response;
