@@ -18,10 +18,19 @@ const CartProvider = ({children}) => {
             obtenerCarritoLocal();
         }
     }, [id]);
-    useEffect(()=>{
-        const nuevoTotal = cart.reduce((sum,item) => sum + (item.precio * item.cantidad),0)
+    useEffect(() => {
+        const nuevoTotal = cart.reduce((sum, item) => {
+            if (item.precio) {
+                return sum + (item.precio * item.cantidad);
+            }
+            const productoCompleto = items?.find(p => p.idproducto === item.idproducto);
+            if (productoCompleto) {
+                return sum + (productoCompleto.precio * item.cantidad);
+            }
+            return sum;
+        }, 0);
         setTotal(nuevoTotal);
-    },[cart]);
+    }, [cart, items]);
     const obtenerCarritoLocal = () => {
         const carritoLocal = localStorage.getItem('cart');
         if(carritoLocal){
