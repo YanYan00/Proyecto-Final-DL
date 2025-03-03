@@ -160,12 +160,12 @@ const CartProvider = ({children}) => {
                 const token = localStorage.getItem('token');
                 const userData = perfil ? {
                     nombre: perfil.nombre,
-                    email: perfil.email,
+                    email: perfil.correo,
                     telefono: perfil.telefono,
                     direccion: perfil.direccion
                 } : null;
                 console.log("Datos de usuario a enviar:", userData);
-                datosEnviados = {
+                const datosEnviados = {
                     idComprador: id,
                     items: itemsCompletos,
                     total,
