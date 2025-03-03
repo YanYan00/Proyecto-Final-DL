@@ -9,6 +9,7 @@ const UserProvider = ({children}) => {
     const [id, setId] = useState(null);
     const [perfil,setPerfil] = useState(null);
     const [posts,setPosts] = useState([]);
+    const [perfilCargando, setPerfilCargando] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -20,6 +21,21 @@ const UserProvider = ({children}) => {
             setId(userIdStorage);
         }
     },[])
+    useEffect(() => {
+        const cargarPerfil = async () => {
+            if (id && token && !perfil && !perfilCargando) {
+                setPerfilCargando(true);
+                try {
+                    await obtenerPerfilBD(id);
+                } catch (error) {
+                    console.error("Error al cargar perfil automáticamente:", error);
+                } finally {
+                    setPerfilCargando(false);
+                }
+            }
+        };
+        cargarPerfil();
+    }, [id, token]);
 //----------------------------------Login-----------------------------
     const login = async (email, password) => {
         try {
@@ -48,6 +64,11 @@ const UserProvider = ({children}) => {
                 setEmail(data.user.correo);
                 setId(data.user.idUsuario);
             }
+            try {
+                await obtenerPerfilBD(data.user.idUsuario);
+            } catch (perfilError) {
+                console.error("Error al cargar perfil después del login:", perfilError);
+            }
         } catch (error) {
             console.error('Error completo:', {
                 message: error.message,
@@ -70,6 +91,7 @@ const UserProvider = ({children}) => {
         setToken(null);
         setEmail(null);
         setId(null);
+        setPerfil(null);
         navigate('/');
     }
 //----------------------------------------Register--------------------------------------------------
@@ -127,8 +149,10 @@ const UserProvider = ({children}) => {
                 throw new Error(`HTTP error! status: ${response.status}`);}          
             const data = await response.json();
             setPerfil(data);
+            return data;
         } catch (error) {
             console.error("Error:", error);
+            throw error;
         }
     }
     const actualizarPerfilBD = async (id,datos) =>{
