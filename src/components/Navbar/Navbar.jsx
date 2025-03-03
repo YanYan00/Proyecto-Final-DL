@@ -5,32 +5,44 @@ import { UserContext } from '../../context/UserContext';
 
 const Navbar = () => {
     const {token,logout,perfil} = useContext(UserContext);
-    return(
+    return (
         <div className='navbar'>
             <div className='nav'>
-                
-                
                 {token ? (
-                        <>
-                            <Link to="/"><h3>¡Bienvenido ${perfil.nombre}!</h3></Link>
-                            <Link to="/cart" className="me-3"><Button variant="outline-light">🛒</Button></Link>
-                            <Link to="/orders" className="me-3">
-                                <Button variant="outline-light">Mis pedidos</Button>
-                            </Link>
-                            <Link to="/posts" className="me-3">
-                                <Button variant="outline-light">Mis publicaciones</Button>
-                            </Link>
-                            <Link to="/profile" className="me-3"><Button variant="warning">Mi Perfil</Button></Link>
-                            <Button variant="warning" onClick={logout}>Cerrar Sesión</Button>
-                        </>
-                    ) : (
-                        <>
-                            <Link to="/"><h3>¡Bienvenido ${perfil.nombre}!</h3></Link>
-                            <Link to="/cart" className="me-3"><Button variant="outline-light">🛒</Button></Link>
-                            <Link to="/login" className="me-3"><Button variant="warning">Iniciar Sesión</Button></Link>
-                            <Link to="/register"><Button variant="warning">Registrarse</Button></Link>
-                        </>
-                    )}
+                    <>
+                        <Link to="/">
+                            <h3>¡Bienvenido {perfil?.nombre || 'Usuario'}!</h3>
+                        </Link>
+                        <Link to="/cart" className="me-3">
+                            <Button variant="outline-light">🛒</Button>
+                        </Link>
+                        <Link to="/orders" className="me-3">
+                            <Button variant="outline-light">Mis pedidos</Button>
+                        </Link>
+                        <Link to="/posts" className="me-3">
+                            <Button variant="outline-light">Mis publicaciones</Button>
+                        </Link>
+                        <Link to="/profile" className="me-3">
+                            <Button variant="warning">Mi Perfil</Button>
+                        </Link>
+                        <Button variant="warning" onClick={logout}>Cerrar Sesión</Button>
+                    </>
+                ) : (
+                    <>
+                        <Link to="/">
+                            <h3>¡Bienvenido!</h3>
+                        </Link>
+                        <Link to="/cart" className="me-3">
+                            <Button variant="outline-light">🛒</Button>
+                        </Link>
+                        <Link to="/login" className="me-3">
+                            <Button variant="warning">Iniciar Sesión</Button>
+                        </Link>
+                        <Link to="/register">
+                            <Button variant="warning">Registrarse</Button>
+                        </Link>
+                    </>
+                )}
             </div>
         </div>
     )
