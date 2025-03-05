@@ -201,7 +201,7 @@ const Cart = () => {
                                 <button 
                                     variant="outline-primary" 
                                     size="sm"
-                                    onClick={() => añadirItemBD(item)}
+                                    onClick={() => añadirItemBD(item)} disabled={isMaxStock}
                                 >
                                     +
                                 </button>
