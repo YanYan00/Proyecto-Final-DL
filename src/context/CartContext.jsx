@@ -8,7 +8,7 @@ export const CartContext = createContext();
 const CartProvider = ({children}) => {
     const [cart, setCart] = useState([]);
     const [total, setTotal] = useState(0);
-    const {id,perfil} = useContext(UserContext);
+    const {id,perfil,obtenerPedidosBD,obtenerComprasBD} = useContext(UserContext);
     const {items,consultarBD} = useContext(ItemsContext);
 
     useEffect(() => {
@@ -218,6 +218,8 @@ const CartProvider = ({children}) => {
             const result = await response.json();
             vaciarCarrito();
             consultarBD();
+            obtenerPedidosBD(id);
+            obtenerComprasBD(id);
             return result;
         } catch (error) {
             console.error('Error al realizar compra:', error);
