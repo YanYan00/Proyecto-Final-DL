@@ -14,13 +14,16 @@ const Navbar = () => {
                             <h3>¡Bienvenido {perfil?.nombre || 'Usuario'}!</h3>
                         </Link>
                         <Link to="/cart" className="me-3">
-                            <Button variant="outline-light">🛒</Button>
+                            <Button variant="warning">🛒</Button>
+                        </Link>
+                        <Link to="/purchases" className="me-3">
+                            <Button variant="warning">Mis compras</Button>
                         </Link>
                         <Link to="/orders" className="me-3">
-                            <Button variant="outline-light">Mis pedidos</Button>
+                            <Button variant="warning">Mis pedidos</Button>
                         </Link>
                         <Link to="/posts" className="me-3">
-                            <Button variant="outline-light">Mis publicaciones</Button>
+                            <Button variant="warning">Mis publicaciones</Button>
                         </Link>
                         <Link to="/profile" className="me-3">
                             <Button variant="warning">Mi Perfil</Button>
