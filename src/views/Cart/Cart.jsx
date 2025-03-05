@@ -26,6 +26,7 @@ const Cart = () => {
         cartItems[item.idproducto] = item;
     });
     console.log("Productos en carrito:", JSON.parse(localStorage.getItem('cart')));
+    localStorage.clear();
     const itemsEnCarrito = items.filter(item => cartItems[item.idproducto]);
 
     const handleComprar = async () => {
