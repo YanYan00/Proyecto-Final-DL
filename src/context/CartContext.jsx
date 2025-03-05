@@ -158,14 +158,37 @@ const CartProvider = ({children}) => {
                 alert('El carro está vacío, no puedes comprar.');
                 return null;
             }
-            const itemsCompletos = cart.map(item => {
-                if (item.idusuario) {
-                    return item;
+            const productosVerificados = [];
+        
+            for (const item of cart) {
+                try {
+                    const token = localStorage.getItem('token');
+                    const response = await fetch(`${API_URL}/api/productos/${item.idproducto}`, {
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        productosVerificados.push(item);
+                    } else {
+                        alert(`El producto "${item.nombre || item.idproducto}" ya no está disponible y será removido del carrito.`);
+                    }
+                } catch (error) {
+                    console.error(`Error al verificar producto ${item.idproducto}:`, error);
                 }
+            }
+            
+            if (productosVerificados.length === 0) {
+                alert('No hay productos válidos en el carrito para procesar la compra.');
+                return null;
+            }
+            const itemsCompletos = productosVerificados.map(item => {
                 const productoCompleto = items.find(p => p.idproducto === item.idproducto);
                 return {
                     ...item,
-                    idusuario: productoCompleto?.idusuario,
+                    idproducto: Number(item.idproducto),
+                    idusuario: productoCompleto ? Number(productoCompleto.idusuario) : null,
                     precio: productoCompleto?.precio || item.precio
                 };
             });
