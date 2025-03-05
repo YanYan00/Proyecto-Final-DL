@@ -8,6 +8,8 @@ import Cart from './views/Cart/Cart.jsx'
 import Posts from './views/Posts/Posts.jsx'
 import Profile from './views/Profile/Profile.jsx'
 import Producto from './views/Producto/Producto.jsx'
+import Orders from './views/Orders/Orders.jsx'
+import Purchases from './views/Purchases/Purchases.jsx'
 function App() {
   return (
     <>
@@ -20,6 +22,8 @@ function App() {
         <Route path='/cart' element={<Cart></Cart>}></Route>
         <Route path='/posts' element={<Posts></Posts>}></Route>
         <Route path='/profile' element={<Profile></Profile>}></Route>
+        <Route path='/orders' element={<Orders></Orders>}></Route>
+        <Route path='/purchases' element={<Purchases></Purchases>}></Route>
       </Routes>
     </>
   )

@@ -90,8 +90,8 @@ const Producto = () =>{
                         </>
                     ):(
                         <div className="btns-compra">
-                            <Button variant="primary" size="lg" onClick={handleAddToCart} disabled={producto.stock <= 0}>
-                                Añadir al carrito
+                            <Button  variant="primary" size="lg" onClick={handleAddToCart} disabled={producto.stock <= 0}>
+                                {producto.stock <= 0 ? 'Sin stock disponible' : 'Añadir al carrito'}
                             </Button>
                             <Button variant="success" size="lg" onClick={handleBuy} disabled={producto.stock <= 0} >
                                 Comprar ahora

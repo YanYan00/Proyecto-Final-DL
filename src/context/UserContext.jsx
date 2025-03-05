@@ -9,6 +9,8 @@ const UserProvider = ({children}) => {
     const [id, setId] = useState(null);
     const [perfil,setPerfil] = useState(null);
     const [posts,setPosts] = useState([]);
+    const [pedidos,setPedidos]= useState(null);
+    const [compras,setCompras]=useState(null);
     const [perfilCargando, setPerfilCargando] = useState(false);
     const navigate = useNavigate();
 
@@ -368,8 +370,72 @@ const UserProvider = ({children}) => {
             throw error;
         }
     }
+//----------------------------------------------------Pedidos---------------------------------------------------------------------------------------------------
+    const obtenerPedidosBD = async (id) =>{
+        try {
+            const token = localStorage.getItem('token');
+            const response = await fetch(`${API_URL}/api/orders/${id}`,{
+                headers:{
+                    "Content-Type":"application/json",
+                    "Authorization":`Bearer ${token}`
+                }
+            });
+            if(!response.ok){
+                throw new Error (`HTTP error! status: ${response.status}`)
+            }
+            const data = await response.json();
+            setPedidos(data);
+            return data;
+        } catch (error) {
+            throw error;
+        }
+    }
+    const obtenerComprasBD = async (id) =>{
+        try {
+            const token = localStorage.getItem('token');
+            const response = await fetch(`${API_URL}/api/purchases/${id}`,{
+                headers:{
+                    "Content-Type":"application/json",
+                    "Authorization":`Bearer ${token}`
+                }
+            });
+            if(!response.ok){
+                throw new Error (`HTTP error! status: ${response.status}`)
+            }
+            const data = await response.json();
+            setCompras(data);
+            return data;
+        } catch (error) {
+            throw error;
+        }
+    }
+    const confirmarEnvioBD = async (id,estado) =>{
+        try {
+            const token = localStorage.getItem('token');
+            const response = await fetch(`${API_URL}/api/orders/${id}`,{
+                method: 'PUT',
+                headers:{
+                    "Content-Type":"application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({dato:estado})
+            });
+            if(!response.ok){
+                throw new Error("Error al editar la publicación");
+            }
+            const result = await response.json();
+            setOrders(prevOrders => 
+                prevOrders.map(order => 
+                    order.iddetalle === id ? {...order, estado: estado} : order
+                )
+            );
+            return result;
+        } catch (error) {
+            throw error;
+        }
+    }
     return(
-        <UserContext.Provider value={{token,email,id,perfil,posts,login,register,logout, handleRegisterSubmit,handleLoginSubmit,obtenerPerfilBD,actualizarPerfilBD,obtenerProductoBD,obtenerPublicacionesBD,agregarPublicacionBD,agregarProductoBD, subirImagenCloudinary,editarProductoBD,editarPublicacionBD,eliminarProductoBD,eliminarPublicacionBD}}>
+        <UserContext.Provider value={{token,email,id,perfil,posts,pedidos,compras,login,register,logout, handleRegisterSubmit,handleLoginSubmit,obtenerPerfilBD,actualizarPerfilBD,obtenerProductoBD,obtenerPublicacionesBD,agregarPublicacionBD,agregarProductoBD, subirImagenCloudinary,editarProductoBD,editarPublicacionBD,eliminarProductoBD,eliminarPublicacionBD,obtenerPedidosBD,obtenerComprasBD,confirmarEnvioBD}}>
             {children}
         </UserContext.Provider>
     )

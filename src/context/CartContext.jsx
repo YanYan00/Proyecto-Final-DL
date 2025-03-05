@@ -9,7 +9,7 @@ const CartProvider = ({children}) => {
     const [cart, setCart] = useState([]);
     const [total, setTotal] = useState(0);
     const {id,perfil} = useContext(UserContext);
-    const {items} = useContext(ItemsContext);
+    const {items,consultarBD} = useContext(ItemsContext);
 
     useEffect(() => {
         if (id) {
@@ -56,6 +56,12 @@ const CartProvider = ({children}) => {
         
     }
     const añadirItemBD = async(producto) =>{
+        const productoActualizado = items.find(item => item.idproducto === producto.idproducto);
+        const stockActual = productoActualizado ? productoActualizado.stock : 0;
+        if (stockActual <= 0) {
+            alert('Este producto no tiene stock disponible');
+            return;
+        }
         if(id){
             try {
                 const token = localStorage.getItem('token');
@@ -87,7 +93,11 @@ const CartProvider = ({children}) => {
             let carritoActualizado = [...cart];
             const productoExistente = carritoActualizado.find(item => item.idproducto === producto.idproducto);
             if(productoExistente){
-                productoExistente.cantidad += 1;
+                if (productoExistente.cantidad >= stockActual) {
+                    alert(`No puedes añadir más unidades. Stock disponible: ${stockActual}`);
+                    return;
+                    }
+                    productoExistente.cantidad += 1;
             }
             else{
                 carritoActualizado.push({
@@ -148,11 +158,6 @@ const CartProvider = ({children}) => {
                 alert('El carro está vacío, no puedes comprar.');
                 return null;
             }
-            console.log("ID del usuario:", id);
-            console.log("Perfil del usuario:", perfil);
-            console.log("Items disponibles:", items);
-            console.log("Carrito actual:", cart);
-            console.log("Datos de comprador:", datosComprador);
             const itemsCompletos = cart.map(item => {
                 if (item.idusuario) {
                     return item;
@@ -174,15 +179,6 @@ const CartProvider = ({children}) => {
                     telefono: perfil.telefono,
                     direccion: perfil.direccion
                 } : null;
-                console.log("Datos de usuario a enviar:", userData);
-                const datosEnviados = {
-                    idComprador: id,
-                    items: itemsCompletos,
-                    total,
-                    userInfo: userData
-                };
-                
-                console.log("DATOS COMPLETOS A ENVIAR:", JSON.stringify(datosEnviados));
                 response = await fetch(`${API_URL}/api/pedidos`, {
                     method: 'POST',
                     headers: {
@@ -221,6 +217,7 @@ const CartProvider = ({children}) => {
             
             const result = await response.json();
             vaciarCarrito();
+            consultarBD();
             return result;
         } catch (error) {
             console.error('Error al realizar compra:', error);
