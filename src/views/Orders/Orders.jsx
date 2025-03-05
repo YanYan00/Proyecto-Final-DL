@@ -20,14 +20,9 @@ const Orders = () =>{
         }
         cargarDatos();
     },[id,token,obtenerPedidosBD]);
-    useEffect(() => {
-        if (pedidos.length > 0) {
-            setLoading(false);
-        }
-    }, [pedidos]);
     return(
         <div className='container-pedidos'>
-            <h2>Mis pedidos</h2>;
+            <h2>Mis pedidos</h2>
             {loading ? (
                 <div className='cargar'>Cargando pedidos...</div>
             ): pedidos.length===0 ?(
