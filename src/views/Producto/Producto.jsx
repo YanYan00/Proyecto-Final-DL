@@ -58,9 +58,6 @@ const Producto = () =>{
                             src={producto.urlimagen}
                             alt={producto.nombre}
                             className="img-details w-100"
-                            onError={(e) => {
-                                e.target.src = 'https://via.placeholder.com/400?text=Sin+imagen';
-                            }}
                         />
                     ) : (
                         <img

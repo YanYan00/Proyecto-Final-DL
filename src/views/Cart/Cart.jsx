@@ -186,11 +186,16 @@ const Cart = () => {
             <div className="cart-items">
                 {itemsEnCarrito.map(item => {
                     const cartItem = cartItems[item.idproducto];
+                    const isMaxStock = cartItem.cantidad >= item.stock;
                     return (
                         <div key={item.idproducto} className="cart-item">
                             <div className="item-info">
                                 <h4>{item.nombre}</h4>
                                 <p>{item.precio} x {cartItem.cantidad} = ${(item.precio * cartItem.cantidad).toFixed(2)}</p>
+                                <p className="stock-info">
+                                    Stock disponible: {item.stock}
+                                    {isMaxStock && <span> (Máximo alcanzado)</span>}
+                                </p>
                             </div>
                             <div className="item-actions">
                                 <button 

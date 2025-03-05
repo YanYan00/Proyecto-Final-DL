@@ -429,6 +429,8 @@ const UserProvider = ({children}) => {
                     pedido.iddetalle === id ? {...pedido, estado: estado} : pedido
                 )
             );
+            obtenerComprasBD(id);
+            obtenerPedidosBD(id);
             return result;
         } catch (error) {
             throw error;
