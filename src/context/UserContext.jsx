@@ -9,8 +9,8 @@ const UserProvider = ({children}) => {
     const [id, setId] = useState(null);
     const [perfil,setPerfil] = useState(null);
     const [posts,setPosts] = useState([]);
-    const [pedidos,setPedidos]= useState(null);
-    const [compras,setCompras]=useState(null);
+    const [pedidos,setPedidos]= useState([]);
+    const [compras,setCompras]=useState([]);
     const [perfilCargando, setPerfilCargando] = useState(false);
     const navigate = useNavigate();
 
@@ -424,9 +424,9 @@ const UserProvider = ({children}) => {
                 throw new Error("Error al editar la publicación");
             }
             const result = await response.json();
-            setOrders(prevOrders => 
-                prevOrders.map(order => 
-                    order.iddetalle === id ? {...order, estado: estado} : order
+            setPedidos(prevPedidos => 
+                prevPedidos.map(pedido => 
+                    pedido.iddetalle === id ? {...pedido, estado: estado} : pedido
                 )
             );
             return result;
