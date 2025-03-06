@@ -5,26 +5,23 @@ import { UserContext } from '../../context/UserContext';
 const Orders = () =>{
     const {id,token,pedidos,obtenerPedidosBD,confirmarEnvioBD} = useContext(UserContext);
     const [loading,setLoading] = useState(true);
-    useEffect(() =>{
-        const cargarDatos = async()=>{
-            if(id && token){
+    useEffect(() => {
+        const cargarDatos = async () => {
+            if (id && token) {
                 setLoading(true);
                 try {
                     await obtenerPedidosBD(id);
+                    setLoading(false);
                 } catch (error) {
                     console.error("Error al cargar pedidos:", error);
-                } finally {
                     setLoading(false);
                 }
+            } else {
+                setLoading(false);
             }
-        }
+        };
         cargarDatos();
-    },[id,token,obtenerPedidosBD]);
-    useEffect(() => {
-        if (pedidos.length > 0) {
-            setLoading(false);
-        }
-    }, [pedidos]);
+    }, [id, token, obtenerPedidosBD]);
     return(
         <div className='container-pedidos'>
             <h2>Mis pedidos</h2>

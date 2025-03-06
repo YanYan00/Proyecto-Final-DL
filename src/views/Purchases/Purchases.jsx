@@ -12,21 +12,17 @@ const Purchases = () => {
                 setLoading(true);
                 try {
                     await obtenerComprasBD(id);
+                    setLoading(false);
                 } catch (error) {
                     console.error("Error al cargar compras:", error);
-                } finally {
                     setLoading(false);
                 }
+            } else {
+                setLoading(false);
             }
         };
-        
         cargarDatos();
     }, [id, token, obtenerComprasBD]);
-    useEffect(() => {
-        if (compras.length > 0) {
-            setLoading(false);
-        }
-    }, [compras]);
     return (
         <div className="container-compras">
             <h2>Mis compras</h2>
