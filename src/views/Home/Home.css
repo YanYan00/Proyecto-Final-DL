@@ -1,14 +1,12 @@
 .home {
-    display: grid;
     width: 100%;
-    min-height: 90vh;
+    display: grid;
     grid-template-areas:
-      "search search search"
-      "menu-cat cards cards"
-      "paginacion paginacion paginacion";
+        "search search search"
+        "menu-cat cards cards"
+        "paginacion paginacion paginacion";
     grid-template-columns: 200px 1fr 1fr;
     grid-template-rows: auto 1fr auto;
-    background-color: #f5f5f5;
   }
   
 .search-container {
@@ -43,6 +41,7 @@
 }
   
 .cards {
+    min-height: 400px;
     grid-area: cards;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
