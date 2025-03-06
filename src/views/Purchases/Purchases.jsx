@@ -50,13 +50,16 @@ const Purchases = () => {
                                     </div>
                                 )}
                                 <div className="info-compra">
-                                    <h4 className="font-bold text-lg">{compra.nombre}</h4>
-                                    <span>{compra.estado}</span>
+                                    <h4>{compra.nombre}</h4>
+                                    <span className="estado-compra">{compra.estado}</span>
+                                    
                                     {compra.nombrevendedor && (
-                                    <p>Vendedor: <span>{compra.nombrevendedor}</span></p>)}
+                                        <p><span>Vendedor: </span>{compra.nombrevendedor}</p>
+                                    )}
+                                    
                                     <p><span>Cantidad: </span>{compra.cantidad}</p>
-                                    <p>Precio unitario: ${compra.precio}</p>
-                                    <p><span>Precio total: </span> ${(compra.precio * compra.cantidad).toLocaleString()} </p>
+                                    <p><span>Precio unitario: </span>${compra.precio.toLocaleString()}</p>
+                                    <p><span>Precio total: </span>${(compra.precio * compra.cantidad).toLocaleString()}</p>
                                 </div>
                             </div>
                         </div>
