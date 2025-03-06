@@ -47,13 +47,15 @@ textarea.input-edit {
   height: 40px;
   width: 300px;
   padding: 8px 12px;
-  border: 1px solid #ccc;
+  border: 1px solid black;
   border-radius: 4px;
   font-size: 16px;
+  background-color: white;
 }
 textarea.input-edit {
   height: auto;
   min-height: 80px;
+  background-color: white;
 }
 .btn-pw,
 .flex.space-x-2 {
@@ -66,8 +68,8 @@ textarea.input-edit {
 }
 .btn-edit,
 .btn-pw button {
-  width: 150px;
-  height: 40px;
+  width: 170px;
+  height: 50px;
   background-color: #EE9B00;
   color: white;
   border: none;
