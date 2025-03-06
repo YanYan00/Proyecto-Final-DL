@@ -78,7 +78,7 @@ const RegisterPage = () => {
         />
         <button 
           type="submit"
-          className="info-registro">
+          className="btn-registro">
           Registrarse
         </button>
       </form>

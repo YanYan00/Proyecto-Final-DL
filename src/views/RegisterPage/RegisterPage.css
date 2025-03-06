@@ -18,5 +18,12 @@
 }
 .info-registro{
     width: 250px;
-    height: 15px;
+    height: 30px;
+    border-radius: 90%;
+}
+.btn-registro{
+    width: 150px;
+    height: 40px;
+    background-color: #EE9B00;
+    color: white;
 }
