@@ -1,7 +1,7 @@
-import './Navbar.css'
 import React, { useContext, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import './Navbar.css'
 import { UserContext } from '../../context/UserContext';
 
 const Navbar = () => {
