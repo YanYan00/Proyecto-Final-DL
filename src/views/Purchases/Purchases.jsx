@@ -21,12 +21,7 @@ const Purchases = () => {
         };
         
         cargarDatos();
-    }, [id, token, obtenerComprasBD]);
-    useEffect(() => {
-        if (compras.length > 0) {
-            setLoading(false);
-        }
-    }, [compras]);
+    }, [id, token]);
     return (
         <div className="container-compras">
             <h2>Mis compras</h2>

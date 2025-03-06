@@ -20,11 +20,6 @@ const Orders = () =>{
         }
         cargarDatos();
     },[id,token]);
-    useEffect(() => {
-        if (pedidos.length > 0) {
-            setLoading(false);
-        }
-    }, [pedidos]);
     return(
         <div className='container-pedidos'>
             <h2>Mis pedidos</h2>
