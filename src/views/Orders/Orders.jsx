@@ -20,6 +20,8 @@ const Orders = () => {
                 } finally {
                     setLoading(false);
                 }
+            } else {
+                setLoading(false);
             }
         };
 
@@ -34,6 +36,7 @@ const Orders = () => {
             ) : error ? (
                 <div className='error'>
                     <p>{error}</p>
+                    <button onClick={() => window.location.reload()}>Reintentar</button>
                 </div>
             ) : pedidos.length === 0 ? (
                 <div className='no-pedidos'>

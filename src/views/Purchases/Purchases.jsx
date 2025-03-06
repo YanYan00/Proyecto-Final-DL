@@ -20,8 +20,11 @@ const Purchases = () => {
                 } finally {
                     setLoading(false);
                 }
+            } else {
+                setLoading(false);
             }
         };
+
         cargarDatos();
     }, [id, token, obtenerComprasBD]);
 
@@ -33,6 +36,7 @@ const Purchases = () => {
             ) : error ? (
                 <div className='error'>
                     <p>{error}</p>
+                    <button onClick={() => window.location.reload()}>Reintentar</button>
                 </div>
             ) : compras.length === 0 ? (
                 <div className='no-pedidos'>

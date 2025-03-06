@@ -15,10 +15,9 @@ const UserProvider = ({children}) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        localStorage.getItem('token');
         const tokenStorage = localStorage.getItem('token')
         const userIdStorage = localStorage.getItem('id')
-        if(tokenStorage){
+        if(tokenStorage && userIdStorage){
             setToken(tokenStorage);
             setId(userIdStorage);
         }
@@ -371,60 +370,78 @@ const UserProvider = ({children}) => {
         }
     }
 //----------------------------------------------------Pedidos---------------------------------------------------------------------------------------------------
-    const obtenerPedidosBD = async (id) => {
-        try {
-            const token = localStorage.getItem('token');
-            const response = await fetch(`${API_URL}/api/orders/${id}`, {
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                }
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const data = await response.json();
-            if (Array.isArray(data) && data.length > 0) {
-                setPedidos(data);
-            } else {
-                setPedidos([]);
-            }
-
-            return data;
-        } catch (error) {
-            console.error("Error en obtenerPedidosBD:", error);
-            setPedidos([]);
-            throw error;
-        }
-    }
     const obtenerComprasBD = async (id) => {
         try {
             const token = localStorage.getItem('token');
+            if (!token) {
+                console.error('No hay token disponible');
+                setCompras([]);
+                return [];
+            }
             const response = await fetch(`${API_URL}/api/purchases/${id}`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`
                 }
             });
-    
+            console.log('Respuesta de obtenerComprasBD:', {
+                status: response.status,
+                headers: Object.fromEntries(response.headers.entries())
+            });
             if (!response.ok) {
+                const errorBody = await response.text();
+                console.error('Error body:', errorBody);
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-    
             const data = await response.json();
-            if (Array.isArray(data) && data.length > 0) {
-                setCompras(data);
-            } else {
-                setCompras([]);
-            }
-    
-            return data;
+            console.log('Datos de compras:', data);
+            setCompras(Array.isArray(data) ? data : []);
+            return Array.isArray(data) ? data : [];
         } catch (error) {
-            console.error("Error en obtenerComprasBD:", error);
+            console.error("Error completo en obtenerComprasBD:", {
+                message: error.message,
+                stack: error.stack
+            });
             setCompras([]);
-            throw error;
+            return [];
+        }
+    }
+
+    const obtenerPedidosBD = async (id) => {
+        try {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                console.error('No hay token disponible');
+                setPedidos([]);
+                return [];
+            }
+            const response = await fetch(`${API_URL}/api/orders/${id}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+            console.log('Respuesta de obtenerPedidosBD:', {
+                status: response.status,
+                headers: Object.fromEntries(response.headers.entries())
+            });
+            if (!response.ok) {
+                const errorBody = await response.text();
+                console.error('Error body:', errorBody);
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log('Datos de pedidos:', data);
+            setPedidos(Array.isArray(data) ? data : []);
+            return Array.isArray(data) ? data : [];
+        } catch (error) {
+            console.error("Error completo en obtenerPedidosBD:", {
+                message: error.message,
+                stack: error.stack
+            });
+            setPedidos([]);
+            return [];
         }
     }
     const confirmarEnvioBD = async (id,estado) =>{
