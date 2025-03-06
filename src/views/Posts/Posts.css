@@ -155,17 +155,21 @@ form {
   border-radius: 4px;
   font-size: 16px;
 }
-.carac-edit-inp textarea{
+textarea {
     background-color: white;
     color: black;
+    min-height: 100px;
+    resize: vertical;
+  }
+select {
+    background-color: white;
+    appearance: auto;
 }
-.carac-edit-inp select{
+  
+select option {
     background-color: white;
     color: black;
-}
-.option-cat{
-    background-color: white;
-    color: black;
+    padding: 5px;
 }
 
 .btn-send-form {
