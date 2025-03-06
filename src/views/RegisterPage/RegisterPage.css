@@ -1,0 +1,22 @@
+.registro{
+    width: 100%;
+    min-height: calc(100vh - 10vh);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.form-registro{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.titulo-registro{
+    color:#005F73;;
+}
+.info-registro{
+    width: 250px;
+    height: 15px;
+}

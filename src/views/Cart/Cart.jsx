@@ -189,6 +189,11 @@ const Cart = () => {
                     return (
                         <div key={item.idproducto} className="cart-item">
                             <div className="item-info">
+                                <img
+                                    src={item.urlimagen}
+                                    alt={item.nombre}
+                                    className="img-producto"
+                                />
                                 <h4>{item.nombre}</h4>
                                 <p>{item.precio} x {cartItem.cantidad} = ${(item.precio * cartItem.cantidad).toFixed(2)}</p>
                                 <p className="stock-info">

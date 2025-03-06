@@ -19,17 +19,16 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 shadow-lg">
-      <h2 className="text-2xl font-bold mb-4">Registro</h2>
-      <form onSubmit={(e) => handleRegisterSubmit(e, data)}>
-        <h2>Registro de Usuario</h2>
+    <div className="registro">
+      <form onSubmit={(e) => handleRegisterSubmit(e, data)} className="form-registro">
+        <h2 className="titulo-registro">Registro de Usuario</h2>
         <input
           type="text"
           name="nombre"
           placeholder="Nombre"
           value={data.nombre}
           onChange={handleChange}
-          className="w-full p-2 mb-3 border rounded"
+          className="info-registro"
           required
         />
         <input
@@ -38,7 +37,7 @@ const RegisterPage = () => {
           placeholder="Correo"
           value={data.email}
           onChange={handleChange}
-          className="w-full p-2 mb-3 border rounded"
+          className="info-registro"
           required
         />
         <input
@@ -47,7 +46,7 @@ const RegisterPage = () => {
           placeholder="Teléfono"
           value={data.telefono}
           onChange={handleChange}
-          className="w-full p-2 mb-3 border rounded"
+          className="info-registro"
           required
         />
         <textarea
@@ -55,7 +54,7 @@ const RegisterPage = () => {
           placeholder="Dirección"
           value={data.direccion}
           onChange={handleChange}
-          className="w-full p-2 mb-3 border rounded"
+          className="info-registro"
           rows="3"
           required
         ></textarea>
@@ -65,7 +64,7 @@ const RegisterPage = () => {
           placeholder="Contraseña"
           value={data.password}
           onChange={handleChange}
-          className="w-full p-2 mb-3 border rounded"
+          className="info-registro"
           required
         />
         <input
@@ -74,12 +73,12 @@ const RegisterPage = () => {
           placeholder="Confirmar Contraseña"
           value={data.confirmPassword}
           onChange={handleChange}
-          className="w-full p-2 mb-3 border rounded"
+          className="info-registro"
           required
         />
         <button 
           type="submit"
-          className="w-full bg-green-500 text-white p-2 rounded">
+          className="info-registro">
           Registrarse
         </button>
       </form>
