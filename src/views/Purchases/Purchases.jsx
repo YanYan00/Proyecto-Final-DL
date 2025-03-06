@@ -5,42 +5,40 @@ import { UserContext } from '../../context/UserContext';
 const Purchases = () => {
     const { id, token, compras, obtenerComprasBD } = useContext(UserContext);
     const [loading, setLoading] = useState(true);
-    const [comprasLocales, setComprasLocales] = useState([]);
-    
+
     useEffect(() => {
         const cargarDatos = async () => {
             if (id && token) {
                 setLoading(true);
                 try {
                     await obtenerComprasBD(id);
-                    setLoading(false);
                 } catch (error) {
                     console.error("Error al cargar compras:", error);
+                } finally {
                     setLoading(false);
                 }
-            } else {
-                setLoading(false);
             }
         };
+        
         cargarDatos();
     }, [id, token, obtenerComprasBD]);
-    
     useEffect(() => {
-        setComprasLocales(compras);
+        if (compras.length > 0) {
+            setLoading(false);
+        }
     }, [compras]);
-    
     return (
         <div className="container-compras">
             <h2>Mis compras</h2>
             {loading ? (
                 <div className='cargar'>Cargando compras...</div>
-            ) : comprasLocales.length === 0 ? (
+            ) : compras.length === 0 ? (
                 <div className='no-pedidos'>
                     <p>No tienes compras actualmente</p>
                 </div>
             ) : (
                 <div className="compras">
-                    {comprasLocales.map((compra) => (
+                    {compras.map((compra) => (
                         <div key={`${compra.idpedido}-${compra.idproducto}`} className="compra">
                             <div className="detalle-compra">
                                 {compra.urlimagen && (
