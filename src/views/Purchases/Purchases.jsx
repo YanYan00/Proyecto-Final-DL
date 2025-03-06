@@ -1,48 +1,37 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../../context/UserContext';
 import './Purchases.css';
+import { useContext, useEffect, useState } from 'react';
+import { UserContext } from '../../context/UserContext';
 
 const Purchases = () => {
     const { id, token, compras, obtenerComprasBD } = useContext(UserContext);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
 
     useEffect(() => {
         const cargarDatos = async () => {
-            setError(null);
-            if (!id || !token) {
-                console.error('Falta ID o token');
-                setLoading(false);
-                return;
-            }
-    
-            try {
+            if (id && token) {
                 setLoading(true);
-                const resultados = await obtenerComprasBD(id);
-                if (resultados.length === 0) {
-                    setError("No tienes compras/pedidos actualmente");
+                try {
+                    await obtenerComprasBD(id);
+                } catch (error) {
+                    console.error("Error al cargar compras:", error);
+                } finally {
+                    setLoading(false);
                 }
-            } catch (error) {
-                console.error("Error al cargar datos:", error);
-                setError("No se pudieron cargar los datos. Intente nuevamente.");
-            } finally {
-                setLoading(false);
             }
         };
-    
+        
         cargarDatos();
     }, [id, token, obtenerComprasBD]);
-
+    useEffect(() => {
+        if (compras.length > 0) {
+            setLoading(false);
+        }
+    }, [compras]);
     return (
         <div className="container-compras">
             <h2>Mis compras</h2>
             {loading ? (
                 <div className='cargar'>Cargando compras...</div>
-            ) : error ? (
-                <div className='error'>
-                    <p>{error}</p>
-                    <button onClick={() => window.location.reload()}>Reintentar</button>
-                </div>
             ) : compras.length === 0 ? (
                 <div className='no-pedidos'>
                     <p>No tienes compras actualmente</p>
@@ -50,10 +39,7 @@ const Purchases = () => {
             ) : (
                 <div className="compras">
                     {compras.map((compra) => (
-                        <div 
-                            key={`${compra.idpedido}-${compra.idproducto}`} 
-                            className="compra"
-                        >
+                        <div key={`${compra.idpedido}-${compra.idproducto}`} className="compra">
                             <div className="detalle-compra">
                                 {compra.urlimagen && (
                                     <div className="img-compra">
@@ -64,16 +50,13 @@ const Purchases = () => {
                                     </div>
                                 )}
                                 <div className="info-compra">
-                                    <h4>{compra.nombre}</h4>
-                                    <span className="estado-compra">{compra.estado}</span>
-                                    
+                                    <h4 className="font-bold text-lg">{compra.nombre}</h4>
+                                    <span>{compra.estado}</span>
                                     {compra.nombrevendedor && (
-                                        <p><span>Vendedor: </span>{compra.nombrevendedor}</p>
-                                    )}
-                                    
+                                    <p>Vendedor: <span>{compra.nombrevendedor}</span></p>)}
                                     <p><span>Cantidad: </span>{compra.cantidad}</p>
-                                    <p><span>Precio unitario: </span>${compra.precio.toLocaleString()}</p>
-                                    <p><span>Precio total: </span>${(compra.precio * compra.cantidad).toLocaleString()}</p>
+                                    <p>Precio unitario: ${compra.precio}</p>
+                                    <p><span>Precio total: </span> ${(compra.precio * compra.cantidad).toLocaleString()} </p>
                                 </div>
                             </div>
                         </div>
