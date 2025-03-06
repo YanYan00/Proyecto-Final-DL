@@ -15,7 +15,9 @@ const Navbar = () => {
     return (
         <div className='navbar'>
             <Link to="/">
-                <h3 className='home'>¡Bienvenido {token && perfil?.nombre ? perfil.nombre : ''}!</h3>
+                <h3 className='home'>
+                    ¡Bienvenido{token && perfil?.nombre ? <span>{perfil.nombre}</span> : ''}!
+                </h3>
             </Link>
             <div className='menu-toggle' onClick={toggleMenu}>
                 <div className='hamburger'></div>

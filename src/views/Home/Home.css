@@ -34,10 +34,32 @@
     grid-area: menu-cat;
     display: flex;
     flex-direction: column;
-    background-color: #f0f0f0;
-    border-right: 1px solid #ddd;
-    padding: 10px;
+    background-color: #1a1a1a;
+    padding: 0;
     overflow-y: auto;
+    border-right: none;
+}
+  
+.menu-cat button {
+    padding: 12px 15px;
+    margin: 0;
+    text-align: left;
+    background-color: #005F73;
+    color: white;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+  
+.menu-cat button:hover {
+    background-color: #007688;
+}
+  
+.menu-cat button.active {
+    background-color: #003F53;
+    color: white;
+    border-left: 4px solid #EE9B00;
 }
   
 .cards {

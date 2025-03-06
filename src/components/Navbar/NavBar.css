@@ -19,6 +19,12 @@
 .home {
     color: white;
     margin: 0;
+    display: flex;
+    align-items: center;
+}
+  
+.home span {
+    margin-left: 5px;
 }
   
 .btns {
