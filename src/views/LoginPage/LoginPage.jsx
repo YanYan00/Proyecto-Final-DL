@@ -19,8 +19,8 @@ const LoginPage = () => {
 
   return (
     <div className="form-login">
-      <h2 className="titulo-login">Inicio de Sesión</h2>
       <form onSubmit={(e) => handleLoginSubmit(e,data)} className="login-form-container">
+        <h2 className="titulo-login">Inicio de Sesión</h2>
         <input 
           type="email" 
           name="email" 

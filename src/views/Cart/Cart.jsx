@@ -194,24 +194,23 @@ const Cart = () => {
                                     alt={item.nombre}
                                     className="img-producto"
                                 />
-                                <h4>{item.nombre}</h4>
-                                <p>{item.precio} x {cartItem.cantidad} = ${(item.precio * cartItem.cantidad).toFixed(2)}</p>
-                                <p className="stock-info">
-                                    Stock disponible: {item.stock}
-                                    {isMaxStock && <span> (Máximo alcanzado)</span>}
-                                </p>
+                                <div className="item-details">
+                                    <h4>{item.nombre}</h4>
+                                    <p>${item.precio.toLocaleString()} x {cartItem.cantidad} = ${(item.precio * cartItem.cantidad).toLocaleString()}</p>
+                                    <p className="stock-info">
+                                        Stock disponible: {item.stock}
+                                        {isMaxStock && <span className="stock-warning"> (Máximo alcanzado)</span>}
+                                    </p>
+                                </div>
                             </div>
                             <div className="item-actions">
                                 <button 
-                                    variant="outline-primary" 
-                                    size="sm"
-                                    onClick={() => añadirItemBD(item)} disabled={isMaxStock}
+                                    onClick={() => añadirItemBD(item)} 
+                                    disabled={isMaxStock}
                                 >
                                     +
                                 </button>
                                 <button 
-                                    variant="outline-danger" 
-                                    size="sm"
                                     onClick={() => eliminarItemBD(item)}
                                 >
                                     -
