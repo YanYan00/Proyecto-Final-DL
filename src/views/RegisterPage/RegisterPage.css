@@ -19,11 +19,12 @@
 .info-registro{
     width: 250px;
     height: 30px;
-    border-radius: 10%;
+    border-radius: 3%;
 }
 .btn-registro{
     width: 150px;
     height: 40px;
     background-color: #EE9B00;
     color: white;
+    border-radius: 4px;
 }
