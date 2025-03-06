@@ -29,7 +29,7 @@ const Navbar = () => {
 
     return (
         <div className='navbar'>
-            <Link to="/">
+            <Link to="/" style={{ textDecoration: 'none' }}>
                 <h3 className='home'>
                     ¡Bienvenido{token && perfil?.nombre ? <span>{perfil.nombre}</span> : ''}!
                 </h3>

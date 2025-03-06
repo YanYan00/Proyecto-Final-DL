@@ -1,37 +1,42 @@
 .navbar {
-    height: 10vh;
+    height: 8vh;
     width: 100%;
     background-color: #005F73;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 15px;
     position: relative;
 }
-  
-.btn-view {
-    height: 45px;
-    width: 120px;
-    background-color: #EE9B00;
-    color: white;
-    border: none;
-}
-  
+
 .home {
     color: white;
     margin: 0;
     display: flex;
     align-items: center;
+    font-size: 1rem;
 }
-  
+
 .home span {
     margin-left: 5px;
 }
-  
+
+.btn-view {
+    height: 35px;
+    width: 100px;
+    background-color: #EE9B00;
+    color: white;
+    border: none;
+    font-size: 0.8rem;
+    padding: 0;
+}
+
 .btns {
     display: flex;
     align-items: center;
+    gap: 10px;
 }
+
 .menu-toggle {
     display: none;
     cursor: pointer;
@@ -41,7 +46,7 @@
     margin-left: 15px;
     z-index: 2;
 }
-  
+
 .hamburger {
     width: 100%;
     height: 3px;
@@ -49,9 +54,8 @@
     position: relative;
     transition: all 0.3s ease;
 }
-  
-.hamburger::before,
-.hamburger::after {
+
+.hamburger::before, .hamburger::after {
     content: '';
     position: absolute;
     width: 100%;
@@ -59,75 +63,76 @@
     background-color: white;
     transition: all 0.3s ease;
 }
-  
+
 .hamburger::before {
     top: -10px;
 }
-  
+
 .hamburger::after {
     top: 10px;
 }
-  
+
 .hamburger.open {
     background-color: transparent;
 }
-  
+
 .hamburger.open::before {
     transform: rotate(45deg);
     top: 0;
 }
-  
+
 .hamburger.open::after {
     transform: rotate(-45deg);
     top: 0;
 }
-  
+
 @media screen and (max-width: 768px) {
     .navbar {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      height: auto;
-      padding: 10px 15px;
+        height: 7vh;
+        padding: 8px 15px;
     }
-    
+
     .menu-toggle {
-      display: flex;
-      align-items: center;
+        display: flex;
+        align-items: center;
     }
+
     .btn-view {
-        height: 40px;
+        height: 35px;
         width: 120px;
         background-color: #EE9B00;
         color: white;
         border: none;
+        font-size: 0.75rem;
     }
+
     .btns {
-      position: fixed;
-      top: 0;
-      right: -250px;
-      width: 250px;
-      height: 100vh;
-      background-color: #005F73;
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 60px 15px 15px;
-      transition: right 0.3s ease;
-      z-index: 998;
-      margin-top: 0;
+        position: fixed;
+        top: 0;
+        right: -250px;
+        width: 250px;
+        height: 100vh;
+        background-color: #005F73;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 60px 15px 15px;
+        transition: right 0.3s ease;
+        z-index: 998;
+        margin-top: 0;
+        gap: 15px;
     }
-    
+
     .btns.active {
-      right: 0;
+        right: 0;
     }
-    
+
     .btns .me-3 {
-      margin: 5px 0;
-      width: 100%;
+        margin: 5px 0;
+        width: 100%;
     }
-    
+
     .btns .btn-view {
-      width: 100%;
-      text-align: left;
+        width: 100%;
+        text-align: center;
     }
 }
