@@ -13,8 +13,9 @@ const Home = () => {
   const { items, categorias } = useContext(ItemsContext);
   const { añadirItem } = useContext(CartContext);
   
-  const inicio = (pagina-1) * 6;
-  const final = inicio + 6;
+  const itemsPorPagina = 12;
+  const inicio = (pagina-1) * itemsPorPagina;
+  const final = inicio + itemsPorPagina;
   
   const actualItems = itemsFiltrados.length > 0 ? itemsFiltrados : items;
   const mostrarItems = actualItems.slice(inicio, final);
@@ -44,17 +45,12 @@ const Home = () => {
       return;
     }
     setBotonActivo(categoria);
+    setCategoriesMenuOpen(false);
   };
   
   return (
     <div className="home-container">
       <div className="main-content">
-        <div 
-          className="categories-toggle" 
-          onClick={() => setCategoriesMenuOpen(!categoriesMenuOpen)}
-        >
-          <div className={`hamburger ${categoriesMenuOpen ? 'open' : ''}`}></div>
-        </div>
         <div className={`categories-menu ${categoriesMenuOpen ? 'active' : ''}`}>
           {categorias.map((categoria, index) => (
             <button 
@@ -68,6 +64,13 @@ const Home = () => {
         </div>
         <div className="right-content">
           <div className="search-section">
+            <div 
+              className="categories-toggle" 
+              onClick={() => setCategoriesMenuOpen(!categoriesMenuOpen)}
+            >
+              <div className={`hamburger ${categoriesMenuOpen ? 'open' : ''}`}></div>
+            </div>
+            
             <input
               type="text"
               placeholder="Buscar productos"
@@ -91,7 +94,7 @@ const Home = () => {
             </button>
             <button 
               onClick={() => setPagina(p => p+1)} 
-              disabled={mostrarItems.length < 6} 
+              disabled={mostrarItems.length < itemsPorPagina} 
               className="page-btn"
             >
               Siguiente

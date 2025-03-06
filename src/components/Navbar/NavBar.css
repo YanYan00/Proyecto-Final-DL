@@ -7,7 +7,7 @@
     align-items: center;
     padding: 0 20px;
     position: relative;
-  }
+}
   
 .btn-view {
     height: 100%;
@@ -15,12 +15,13 @@
     color: white;
     border: none;
 }
+  
 .home {
     color: white;
     margin: 0;
     display: flex;
     align-items: center;
-  }
+}
   
 .home span {
     margin-left: 5px;
@@ -30,17 +31,94 @@
     display: flex;
     align-items: center;
 }
-
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    margin-left: 15px;
+    z-index: 2;
+}
+  
+.hamburger {
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    position: relative;
+    transition: all 0.3s ease;
+}
+  
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    transition: all 0.3s ease;
+}
+  
+.hamburger::before {
+    top: -10px;
+}
+  
+.hamburger::after {
+    top: 10px;
+}
+  
+.hamburger.open {
+    background-color: transparent;
+}
+  
+.hamburger.open::before {
+    transform: rotate(45deg);
+    top: 0;
+}
+  
+.hamburger.open::after {
+    transform: rotate(-45deg);
+    top: 0;
+}
+  
 @media screen and (max-width: 768px) {
     .navbar {
-      flex-direction: column;
+      flex-direction: row;
+      justify-content: space-between;
       height: auto;
-      padding: 10px;
+      padding: 10px 15px;
     }
-  
+    
+    .menu-toggle {
+      display: block;
+    }
+    
     .btns {
-      margin-top: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
+      position: fixed;
+      top: 0;
+      right: -250px;
+      width: 250px;
+      height: 100vh;
+      background-color: #005F73;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 60px 15px 15px;
+      transition: right 0.3s ease;
+      z-index: 998;
+      margin-top: 0;
+    }
+    
+    .btns.active {
+      right: 0;
+    }
+    
+    .btns .me-3 {
+      margin: 5px 0;
+      width: 100%;
+    }
+    
+    .btns .btn-view {
+      width: 100%;
+      text-align: left;
     }
 }
