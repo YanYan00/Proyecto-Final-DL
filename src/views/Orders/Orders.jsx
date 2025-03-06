@@ -19,7 +19,7 @@ const Orders = () =>{
             }
         }
         cargarDatos();
-    },[id,token,obtenerPedidosBD]);
+    },[id,token]);
     useEffect(() => {
         if (pedidos.length > 0) {
             setLoading(false);
