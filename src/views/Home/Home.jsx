@@ -9,6 +9,7 @@ const Home = () => {
   const [botonActivo, setBotonActivo] = useState(null);
   const [buscador, setBuscador] = useState('');
   const [pagina, setPagina] = useState(1);
+  const [categoriesMenuOpen, setCategoriesMenuOpen] = useState(false);
   const { items, categorias } = useContext(ItemsContext);
   const { añadirItem } = useContext(CartContext);
   
@@ -48,7 +49,13 @@ const Home = () => {
   return (
     <div className="home-container">
       <div className="main-content">
-        <div className="categories-menu">
+        <div 
+          className="categories-toggle" 
+          onClick={() => setCategoriesMenuOpen(!categoriesMenuOpen)}
+        >
+          <div className={`hamburger ${categoriesMenuOpen ? 'open' : ''}`}></div>
+        </div>
+        <div className={`categories-menu ${categoriesMenuOpen ? 'active' : ''}`}>
           {categorias.map((categoria, index) => (
             <button 
               onClick={() => filtrarItems(categoria)} 
