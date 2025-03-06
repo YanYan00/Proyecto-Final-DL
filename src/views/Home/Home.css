@@ -81,14 +81,16 @@
 }
 
 .pagination-container {
+  padding: 10px;
   display: flex;
   justify-content: center;
   gap: 10px;
-  background-color: white;
+  background-color: #005F73;
   border-top: 1px solid #eee;
 }
 
 .page-btn {
+  padding: 8px 15px;
   background-color: #EE9B00;
   color: white;
   border: none;
