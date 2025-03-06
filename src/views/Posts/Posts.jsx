@@ -207,7 +207,7 @@ const Posts = () =>{
                 )}
             </div>
             <div className="edit-form-carac">
-                <label className="carac-edit">Título de la Publicación: </label>
+                <span><label className="carac-edit">Título de la Publicación: </label></span>
                 <input
                     type="text"
                     name="titulo"
@@ -219,7 +219,7 @@ const Posts = () =>{
             </div>
 
             <div className="edit-form-carac">
-                <label className="carac-edit">Nombre del Producto: </label>
+                <span><label className="carac-edit">Nombre del Producto: </label></span>
                 <input
                     type="text"
                     name="nombre"
@@ -231,7 +231,7 @@ const Posts = () =>{
             </div>
 
             <div className="edit-form-carac">
-                <label className="carac-edit">Descripción</label>
+                <span><label className="carac-edit">Descripción</label></span>
                 <textarea
                     name="descripcion"
                     value={formData.descripcion}
@@ -242,7 +242,7 @@ const Posts = () =>{
             </div>
 
             <div className="edit-form-carac">
-                <label className="carac-edit">Precio: </label>
+                <span><label className="carac-edit">Precio: </label></span>
                 <input
                     type="number"
                     name="precio"
@@ -254,7 +254,7 @@ const Posts = () =>{
             </div>
 
             <div className="edit-form-carac">
-                <label className="carac-edit">Stock: </label>
+                <span><label className="carac-edit">Stock: </label></span>
                 <input
                     type="number"
                     name="stock"
@@ -266,7 +266,7 @@ const Posts = () =>{
             </div>
 
             <div className="edit-form-carac">
-                <label className="carac-edit">Categoría: </label>
+                <span><label className="carac-edit">Categoría: </label></span>
                 <select
                     name="idCategoria"
                     value={formData.idCategoria}
