@@ -1,5 +1,5 @@
 import CardItem from "../../components/CardItem/CardItem";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import { ItemsContext } from "../../context/ItemsContext";
 import './Home.css'
 import { CartContext } from "../../context/CartContext";
@@ -12,6 +12,8 @@ const Home = () => {
   const [categoriesMenuOpen, setCategoriesMenuOpen] = useState(false);
   const { items, categorias } = useContext(ItemsContext);
   const { añadirItem } = useContext(CartContext);
+  const menuRef = useRef(null);
+  const buttonRef = useRef(null);
   
   const itemsPorPagina = 12;
   const inicio = (pagina-1) * itemsPorPagina;
@@ -37,6 +39,20 @@ const Home = () => {
     setItemsFiltrados(filtradas);
     setPagina(1);
   }, [botonActivo, buscador, items]);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target) && 
+          buttonRef.current && !buttonRef.current.contains(event.target)) {
+        setCategoriesMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
   
   const filtrarItems = (categoria) => {
     if (botonActivo?.nombre === categoria.nombre) {
@@ -51,7 +67,7 @@ const Home = () => {
   return (
     <div className="home-container">
       <div className="main-content">
-        <div className={`categories-menu ${categoriesMenuOpen ? 'active' : ''}`}>
+        <div className={`categories-menu ${categoriesMenuOpen ? 'active' : ''}`} ref={menuRef}>
           {categorias.map((categoria, index) => (
             <button 
               onClick={() => filtrarItems(categoria)} 
@@ -67,6 +83,7 @@ const Home = () => {
             <div 
               className="categories-toggle" 
               onClick={() => setCategoriesMenuOpen(!categoriesMenuOpen)}
+              ref={buttonRef}
             >
               <div className={`hamburger ${categoriesMenuOpen ? 'open' : ''}`}></div>
             </div>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
@@ -7,10 +7,25 @@ import "./NavBar.css"
 const Navbar = () => {
     const { token, logout, perfil } = useContext(UserContext);
     const [menuOpen, setMenuOpen] = useState(false);
+    const menuRef = useRef(null);
+    const buttonRef = useRef(null);
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
     };
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (menuRef.current && !menuRef.current.contains(event.target) && 
+                buttonRef.current && !buttonRef.current.contains(event.target)) {
+                setMenuOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     return (
         <div className='navbar'>
@@ -19,26 +34,26 @@ const Navbar = () => {
                     ¡Bienvenido{token && perfil?.nombre ? <span>{perfil.nombre}</span> : ''}!
                 </h3>
             </Link>
-            <div className='menu-toggle' onClick={toggleMenu}>
+            <div className='menu-toggle' onClick={toggleMenu} ref={buttonRef}>
                 <div className='hamburger'></div>
             </div>
-            <div className={`btns ${menuOpen ? 'active' : ''}`}>
+            <div className={`btns ${menuOpen ? 'active' : ''}`} ref={menuRef}>
                 {token ? (
                     <>
                         <Link to="/cart" className="me-3">
-                            <Button className='btn-view'>🛒</Button>
+                            <Button className='btn-view'>Carrito</Button>
                         </Link>
                         <Link to="/purchases" className="me-3">
-                            <Button className='btn-view'>Mis compras</Button>
+                            <Button className='btn-view'>Compras</Button>
                         </Link>
                         <Link to="/orders" className="me-3">
-                            <Button className='btn-view'>Mis pedidos</Button>
+                            <Button className='btn-view'>Pedidos</Button>
                         </Link>
                         <Link to="/posts" className="me-3">
-                            <Button className='btn-view'>Mis publicaciones</Button>
+                            <Button className='btn-view'>Publicaciones</Button>
                         </Link>
                         <Link to="/profile" className="me-3">
-                            <Button className='btn-view'>Mi Perfil</Button>
+                            <Button className='btn-view'>Perfil</Button>
                         </Link>
                         <Button className='btn-view' onClick={logout}>Cerrar Sesión</Button>
                     </>
