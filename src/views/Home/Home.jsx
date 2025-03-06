@@ -48,16 +48,34 @@ const Home = () => {
   return (
     <div className="home-container">
       <div className="main-content">
-        <div className="categories-menu">
-          {categorias.map((categoria, index) => (
+        <div className="left-column">
+          <div className="categories-menu">
+            {categorias.map((categoria, index) => (
+              <button 
+                onClick={() => filtrarItems(categoria)} 
+                key={index} 
+                className={`category-btn ${botonActivo?.nombre === categoria.nombre ? 'active' : ''}`}
+              >
+                {categoria.nombre}
+              </button>
+            ))}
+          </div>
+          <div className="pagination">
             <button 
-              onClick={() => filtrarItems(categoria)} 
-              key={index} 
-              className={`category-btn ${botonActivo?.nombre === categoria.nombre ? 'active' : ''}`}
+              onClick={() => setPagina(p => p-1)} 
+              disabled={pagina === 1} 
+              className="page-btn"
             >
-              {categoria.nombre}
+              Anterior
             </button>
-          ))}
+            <button 
+              onClick={() => setPagina(p => p+1)} 
+              disabled={mostrarItems.length < 6} 
+              className="page-btn"
+            >
+              Siguiente
+            </button>
+          </div>
         </div>
         <div className="right-content">
           <div className="search-section">
@@ -75,22 +93,6 @@ const Home = () => {
             ))}
           </div>
         </div>
-      </div>
-      <div className="pagination">
-        <button 
-          onClick={() => setPagina(p => p-1)} 
-          disabled={pagina === 1} 
-          className="page-btn"
-        >
-          Anterior
-        </button>
-        <button 
-          onClick={() => setPagina(p => p+1)} 
-          disabled={mostrarItems.length < 6} 
-          className="page-btn"
-        >
-          Siguiente
-        </button>
       </div>
     </div>
   );
