@@ -1,8 +1,9 @@
 .footer {
     background-color: #005F73;
     color: white;
-    padding: 2rem 0;
+    padding: 1rem 0;
     width: 100%;
+    font-size: 0.9rem;
 }
 
 .footer-container {
@@ -11,20 +12,21 @@
     align-items: flex-start;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 0.5rem;
 }
 
 .footer-section {
     flex: 1;
     text-align: center;
-    padding: 0 1rem;
+    padding: 0 0.5rem;
 }
 
 .footer-section h4 {
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     color: #ecf0f1;
     border-bottom: 2px solid #3498db;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.3rem;
+    font-size: 1rem;
 }
 
 .social-links {
@@ -36,8 +38,9 @@
 .social-links a {
     color: #bdc3c7;
     text-decoration: none;
-    margin: 0.5rem 0;
+    margin: 0.3rem 0;
     transition: color 0.3s ease;
+    font-size: 0.9rem;
 }
 
 .social-links a:hover {
@@ -45,45 +48,44 @@
 }
 
 @media (max-width: 768px) {
+    .footer {
+        padding: 0.5rem 0;
+        font-size: 0.8rem;
+    }
+
     .footer-container {
         flex-direction: column;
         text-align: center;
+        gap: 0.5rem;
     }
 
     .footer-section {
-        margin-bottom: 1.5rem;
-    }
-
-    .footer-section h4 {
-        font-size: 1rem;
-        padding-bottom: 0.3rem;
-    }
-
-    .social-links a {
-        margin: 0.3rem 0;
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .footer {
-        padding: 1rem 0;
-    }
-
-    .footer-container {
-        padding: 0 0.5rem;
-    }
-
-    .footer-section {
-        padding: 0;
+        margin-bottom: 0.5rem;
     }
 
     .footer-section h4 {
         font-size: 0.9rem;
+        padding-bottom: 0.2rem;
     }
 
     .social-links a {
         margin: 0.2rem 0;
         font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer {
+        padding: 0.5rem 0;
+        font-size: 0.7rem;
+    }
+
+    .footer-section h4 {
+        font-size: 0.8rem;
+    }
+
+    .social-links a {
+        margin: 0.1rem 0;
+        font-size: 0.7rem;
     }
 }
