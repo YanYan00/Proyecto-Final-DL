@@ -67,7 +67,7 @@ const Producto = () =>{
                         />
                     )}
                 </Col>
-                <Col>
+                <Col className="detalle-producto">
                     <h2>{producto.nombre}</h2>
                     <h3>{producto.precio?.toLocaleString()}</h3>
                     <h3>Categoria:{producto.categoria}</h3>
