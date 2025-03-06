@@ -5,7 +5,8 @@ import { UserContext } from '../../context/UserContext';
 const Purchases = () => {
     const { id, token, compras, obtenerComprasBD } = useContext(UserContext);
     const [loading, setLoading] = useState(true);
-
+    const [comprasLocales, setComprasLocales] = useState([]);
+    
     useEffect(() => {
         const cargarDatos = async () => {
             if (id && token) {
@@ -23,18 +24,23 @@ const Purchases = () => {
         };
         cargarDatos();
     }, [id, token, obtenerComprasBD]);
+    
+    useEffect(() => {
+        setComprasLocales(compras);
+    }, [compras]);
+    
     return (
         <div className="container-compras">
             <h2>Mis compras</h2>
             {loading ? (
                 <div className='cargar'>Cargando compras...</div>
-            ) : compras.length === 0 ? (
+            ) : comprasLocales.length === 0 ? (
                 <div className='no-pedidos'>
                     <p>No tienes compras actualmente</p>
                 </div>
             ) : (
                 <div className="compras">
-                    {compras.map((compra) => (
+                    {comprasLocales.map((compra) => (
                         <div key={`${compra.idpedido}-${compra.idproducto}`} className="compra">
                             <div className="detalle-compra">
                                 {compra.urlimagen && (

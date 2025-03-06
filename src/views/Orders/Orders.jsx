@@ -1,10 +1,12 @@
-import './Orders.css'
+import './Orders.css';
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../context/UserContext';
 
-const Orders = () =>{
-    const {id,token,pedidos,obtenerPedidosBD,confirmarEnvioBD} = useContext(UserContext);
-    const [loading,setLoading] = useState(true);
+const Orders = () => {
+    const { id, token, pedidos, obtenerPedidosBD, confirmarEnvioBD } = useContext(UserContext);
+    const [loading, setLoading] = useState(true);
+    const [pedidosLocales, setPedidosLocales] = useState([]);
+
     useEffect(() => {
         const cargarDatos = async () => {
             if (id && token) {
@@ -22,18 +24,23 @@ const Orders = () =>{
         };
         cargarDatos();
     }, [id, token, obtenerPedidosBD]);
-    return(
+    
+    useEffect(() => {
+        setPedidosLocales(pedidos);
+    }, [pedidos]);
+    
+    return (
         <div className='container-pedidos'>
             <h2>Mis pedidos</h2>
             {loading ? (
                 <div className='cargar'>Cargando pedidos...</div>
-            ): pedidos.length===0 ?(
+            ) : pedidosLocales.length === 0 ? (
                 <div className='no-pedidos'>
                     <p>No tienes pedidos actualmente</p>
                 </div>
-            ):(
+            ) : (
                 <div className='pedidos'>
-                    {pedidos.map((pedido) => (
+                    {pedidosLocales.map((pedido) => (
                         <div key={`${pedido.idpedido}-${pedido.idproducto}`} className='pedido'>
                             <div className='detalles-pedido'>
                                 {pedido.urlimagen && (
@@ -62,10 +69,9 @@ const Orders = () =>{
                         </div>
                     ))}
                 </div>
-            )}  
+            )}
         </div>
-        
-    )
-}
+    );
+};
 
 export default Orders;
