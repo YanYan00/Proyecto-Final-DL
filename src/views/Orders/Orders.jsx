@@ -1,3 +1,7 @@
+import React, { useContext, useEffect, useState } from 'react';
+import { UserContext } from '../../context/UserContext';
+import './Orders.css';
+
 const Orders = () => {
     const { id, token, pedidos, obtenerPedidosBD, confirmarEnvioBD } = useContext(UserContext);
     const [loading, setLoading] = useState(true);
@@ -18,6 +22,7 @@ const Orders = () => {
                 }
             }
         };
+
         cargarDatos();
     }, [id, token, obtenerPedidosBD]);
 
