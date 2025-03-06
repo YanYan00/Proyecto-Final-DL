@@ -1,0 +1,40 @@
+.card {
+    height: 300px;
+    width: 150px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    margin: 0 auto;
+}
+  
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+  
+.card-img-cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    overflow: hidden;
+}
+  
+.card-img {
+    height: 200px;
+    width: 125px;
+    object-fit: contain;
+}
+  
+.card-name {
+    font-size: medium;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+  
+.card-price {
+    font-size: large;
+    font-weight: bold;
+    color: #005F73;
+}
