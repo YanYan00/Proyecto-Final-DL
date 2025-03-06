@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
-import "./Navbar.css"
+import "./NavBar.css"
 
 const Navbar = () => {
     const { token, logout, perfil } = useContext(UserContext);
