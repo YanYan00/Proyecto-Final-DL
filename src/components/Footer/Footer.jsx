@@ -20,7 +20,7 @@ const Footer = () => {
                 </div>
                 <div className="footer-section">
                     <h4>Información</h4>
-                    <p>© {new Date().getFullYear()} Tu Empresa. Todos los derechos reservados.</p>
+                    <p>© {new Date().getFullYear()} Jean Rojas. Todos los derechos reservados.</p>
                 </div>
             </div>
         </footer>

@@ -60,7 +60,7 @@ const Navbar = () => {
                 ) : (
                     <>
                         <Link to="/cart" className="me-3">
-                            <Button className='btn-view'>🛒</Button>
+                            <Button className='btn-view'>Carrito</Button>
                         </Link>
                         <Link to="/login" className="me-3">
                             <Button className='btn-view'>Iniciar Sesión</Button>
