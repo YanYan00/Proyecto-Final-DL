@@ -6,9 +6,10 @@
 
 .home-container {
   width: 100%;
-  min-height: calc(100vh - 10vh);
+  height: calc(100vh - 8vh);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .main-content {
