@@ -1,0 +1,32 @@
+.producto{
+    width: 100%;
+    min-height: calc(100vh - 10vh);
+    align-items: center;
+}
+.cont-producto{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+.img-producto{
+    width: 400px;
+    height: 400px;
+
+}
+.detalle-producto{
+    display: flex;
+    flex-direction: column;
+}
+.btns-compra{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.option-btn{
+    width: 200px;
+    height: 50px;
+    background-color: #EE9B00;
+    color: white;
+}

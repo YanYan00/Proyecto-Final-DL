@@ -163,6 +163,7 @@ textarea {
   }
 select {
     background-color: white;
+    color:black;
     appearance: auto;
 }
   

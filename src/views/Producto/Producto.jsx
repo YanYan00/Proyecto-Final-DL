@@ -50,14 +50,14 @@ const Producto = () =>{
     }
     const productoPropio = producto && producto.idusuario === parseInt(idUsuario);
     return (
-        <Container>
-            <Row>
+        <Container className="producto">
+            <Row className="cont-producto">
                 <Col>
                     {producto.urlimagen ? (
                         <img
                             src={producto.urlimagen}
                             alt={producto.nombre}
-                            className="img-details w-100"
+                            className="img-producto"
                         />
                     ) : (
                         <img
@@ -77,29 +77,26 @@ const Producto = () =>{
                         <>
                             <alert>Este es tu producto, no puedes comprarlo</alert>
                             <div className="btns-compra">
-                                <Button variant="primary" size="lg" disabled={true}>
+                                <Button className="option-btn" disabled={true}>
                                     Añadir al carrito
                                 </Button>
-                                <Button variant="success" size="lg" disabled={true}>
+                                <Button className="option-btn" disabled={true}>
                                     Comprar ahora
                                 </Button>
                             </div>
                         </>
                     ):(
                         <div className="btns-compra">
-                            <Button  variant="primary" size="lg" onClick={handleAddToCart} disabled={producto.stock <= 0}>
+                            <Button  className="option-btn" onClick={handleAddToCart} disabled={producto.stock <= 0}>
                                 {producto.stock <= 0 ? 'Sin stock disponible' : 'Añadir al carrito'}
                             </Button>
-                            <Button variant="success" size="lg" onClick={handleBuy} disabled={producto.stock <= 0} >
+                            <Button className="option-btn" onClick={handleBuy} disabled={producto.stock <= 0} >
                                 Comprar ahora
                             </Button>
                         </div>
                     )}
                 </Col>
             </Row>
-            <Button variant="outline-secondary" className="btn-volver" onClick={() => navigate('/')}>
-                Volver
-            </Button>
         </Container>
     )
 }
