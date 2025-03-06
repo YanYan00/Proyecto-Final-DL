@@ -47,9 +47,7 @@ const Home = () => {
   
   return (
     <div className="home-container">
-      {/* Contenido principal */}
       <div className="main-content">
-        {/* Menú de categorías (a la izquierda) */}
         <div className="categories-menu">
           {categorias.map((categoria, index) => (
             <button 
@@ -61,10 +59,7 @@ const Home = () => {
             </button>
           ))}
         </div>
-        
-        {/* Contenido derecho */}
         <div className="right-content">
-          {/* Barra de búsqueda */}
           <div className="search-section">
             <input
               type="text"
@@ -74,34 +69,27 @@ const Home = () => {
               className="search-input"
             />
           </div>
-          
-          {/* Productos */}
           <div className="products-grid">
             {mostrarItems.map((item, index) => (
               <CardItem item={item} key={index} añadirItem={añadirItem} />
             ))}
           </div>
-        </div>
-      </div>
-      
-      {/* Paginación en la parte inferior pero alineada con el layout principal */}
-      <div className="bottom-section">
-        <div className="pagination-spacer"></div>
-        <div className="pagination">
-          <button 
-            onClick={() => setPagina(p => p-1)} 
-            disabled={pagina === 1} 
-            className="page-btn"
-          >
-            Anterior
-          </button>
-          <button 
-            onClick={() => setPagina(p => p+1)} 
-            disabled={mostrarItems.length < 6} 
-            className="page-btn"
-          >
-            Siguiente
-          </button>
+          <div className="pagination-container">
+            <button 
+              onClick={() => setPagina(p => p-1)} 
+              disabled={pagina === 1} 
+              className="page-btn"
+            >
+              Anterior
+            </button>
+            <button 
+              onClick={() => setPagina(p => p+1)} 
+              disabled={mostrarItems.length < 6} 
+              className="page-btn"
+            >
+              Siguiente
+            </button>
+          </div>
         </div>
       </div>
     </div>
