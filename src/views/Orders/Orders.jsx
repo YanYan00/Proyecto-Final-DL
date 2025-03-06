@@ -10,21 +10,26 @@ const Orders = () => {
     useEffect(() => {
         const cargarDatos = async () => {
             setError(null);
-            if (id && token) {
-                try {
-                    setLoading(true);
-                    await obtenerPedidosBD(id);
-                } catch (error) {
-                    console.error("Error al cargar pedidos:", error);
-                    setError("No se pudieron cargar los pedidos. Intente nuevamente.");
-                } finally {
-                    setLoading(false);
+            if (!id || !token) {
+                console.error('Falta ID o token');
+                setLoading(false);
+                return;
+            }
+    
+            try {
+                setLoading(true);
+                const resultados = await obtenerPedidosBD(id);
+                if (resultados.length === 0) {
+                    setError("No tienes compras/pedidos actualmente");
                 }
-            } else {
+            } catch (error) {
+                console.error("Error al cargar datos:", error);
+                setError("No se pudieron cargar los datos. Intente nuevamente.");
+            } finally {
                 setLoading(false);
             }
         };
-
+    
         cargarDatos();
     }, [id, token, obtenerPedidosBD]);
 
