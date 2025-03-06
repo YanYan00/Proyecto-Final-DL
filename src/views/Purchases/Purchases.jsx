@@ -1,37 +1,39 @@
-import './Purchases.css';
-import { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../context/UserContext';
+import './Purchases.css';
 
 const Purchases = () => {
     const { id, token, compras, obtenerComprasBD } = useContext(UserContext);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const cargarDatos = async () => {
+            setError(null);
             if (id && token) {
-                setLoading(true);
                 try {
+                    setLoading(true);
                     await obtenerComprasBD(id);
                 } catch (error) {
                     console.error("Error al cargar compras:", error);
+                    setError("No se pudieron cargar las compras. Intente nuevamente.");
                 } finally {
                     setLoading(false);
                 }
             }
         };
-        
         cargarDatos();
     }, [id, token, obtenerComprasBD]);
-    useEffect(() => {
-        if (compras.length > 0) {
-            setLoading(false);
-        }
-    }, [compras]);
+
     return (
         <div className="container-compras">
             <h2>Mis compras</h2>
             {loading ? (
                 <div className='cargar'>Cargando compras...</div>
+            ) : error ? (
+                <div className='error'>
+                    <p>{error}</p>
+                </div>
             ) : compras.length === 0 ? (
                 <div className='no-pedidos'>
                     <p>No tienes compras actualmente</p>
@@ -39,7 +41,10 @@ const Purchases = () => {
             ) : (
                 <div className="compras">
                     {compras.map((compra) => (
-                        <div key={`${compra.idpedido}-${compra.idproducto}`} className="compra">
+                        <div 
+                            key={`${compra.idpedido}-${compra.idproducto}`} 
+                            className="compra"
+                        >
                             <div className="detalle-compra">
                                 {compra.urlimagen && (
                                     <div className="img-compra">

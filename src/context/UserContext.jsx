@@ -371,41 +371,59 @@ const UserProvider = ({children}) => {
         }
     }
 //----------------------------------------------------Pedidos---------------------------------------------------------------------------------------------------
-    const obtenerPedidosBD = async (id) =>{
+    const obtenerPedidosBD = async (id) => {
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`${API_URL}/api/orders/${id}`,{
-                headers:{
-                    "Content-Type":"application/json",
-                    "Authorization":`Bearer ${token}`
+            const response = await fetch(`${API_URL}/api/orders/${id}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
                 }
             });
-            if(!response.ok){
-                throw new Error (`HTTP error! status: ${response.status}`)
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
+
             const data = await response.json();
-            setPedidos(data);
+            if (Array.isArray(data) && data.length > 0) {
+                setPedidos(data);
+            } else {
+                setPedidos([]);
+            }
+
             return data;
         } catch (error) {
+            console.error("Error en obtenerPedidosBD:", error);
+            setPedidos([]);
             throw error;
         }
     }
-    const obtenerComprasBD = async (id) =>{
+    const obtenerComprasBD = async (id) => {
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`${API_URL}/api/purchases/${id}`,{
-                headers:{
-                    "Content-Type":"application/json",
-                    "Authorization":`Bearer ${token}`
+            const response = await fetch(`${API_URL}/api/purchases/${id}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
                 }
             });
-            if(!response.ok){
-                throw new Error (`HTTP error! status: ${response.status}`)
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
+    
             const data = await response.json();
-            setCompras(data);
+            if (Array.isArray(data) && data.length > 0) {
+                setCompras(data);
+            } else {
+                setCompras([]);
+            }
+    
             return data;
         } catch (error) {
+            console.error("Error en obtenerComprasBD:", error);
+            setCompras([]);
             throw error;
         }
     }
