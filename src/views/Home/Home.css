@@ -82,13 +82,13 @@
   display: flex;
   justify-content: center;
   gap: 10px;
-  background-color: #005F73;
-  color: white;
+  background-color: white;
+  border-top: 1px solid #eee;
 }
 
 .page-btn {
   padding: 8px 15px;
-  background-color: #007688;
+  background-color: #EE9B00;
   color: white;
   border: none;
   border-radius: 4px;
@@ -97,13 +97,12 @@
 }
 
 .page-btn:hover:not(:disabled) {
-  background-color: #003F53;
+  background-color: #ca8400;
 }
 
 .page-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-  background-color: #004D63;
 }
 
 .categories-toggle {
