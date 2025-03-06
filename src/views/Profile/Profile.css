@@ -80,6 +80,7 @@ textarea.input-edit {
   height: auto;
   min-height: 80px;
   background-color: white;
+  color: black;
 }
 .btn-pw,
 .flex.space-x-2 {
