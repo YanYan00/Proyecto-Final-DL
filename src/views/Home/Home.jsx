@@ -15,7 +15,7 @@ const Home = () => {
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
   
-  const itemsPorPagina = 12;
+  const itemsPorPagina = 8;
   const inicio = (pagina-1) * itemsPorPagina;
   const final = inicio + itemsPorPagina;
   

@@ -1,5 +1,5 @@
 .card {
-    width: 200px;
+    width: 250px;
     height: auto;
     max-height: 320px;
     border-radius: 8px;
@@ -36,7 +36,7 @@
 .card-name {
     font-size: 8px;
     margin-bottom: 8px;
-    height: 36px;
+    height: 45px;
 }
   
 .card-price {
