@@ -1,5 +1,5 @@
-.profile-user,
-.form-data,
+.profile-user, 
+.form-data, 
 .form-pw {
   width: 100%;
   min-height: calc(100vh - 10vh);
@@ -9,8 +9,8 @@
   justify-content: center;
   padding: 20px;
 }
-.profile-title,
-.pf-title,
+.profile-title, 
+.pf-title, 
 .pw-title {
   font-size: 24px;
   font-weight: bold;
@@ -18,60 +18,56 @@
   color: #005F73;
   text-align: center;
 }
+.pw-form,
+.space-y-4 {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.info-profile,
 .new-data {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    max-width: 500px;
-    margin-bottom: 15px;
-}
-.new-data span {
-    width: 180px;
-    text-align: right;
-    padding-right: 10px;
-    font-weight: bold;
-}
-
-.info-profile {
   display: flex;
   align-items: center;
   width: 100%;
   max-width: 500px;
   margin-bottom: 15px;
 }
-.new-data input,
-.new-data textarea {
-  flex: 1;
-  min-width: 250px;
+.new-data span {
+  width: 180px;
+  text-align: right;
+  padding-right: 10px;
+  font-weight: bold;
 }
-.form-pw .pw-form {
-  width: 100%;
-  max-width: 500px;
-  margin: 0 auto;
-}
-.nv-pw {
-  display: inline-block;
-  white-space: nowrap;
+
+.info-profile span {
+  width: 120px;
+  font-weight: bold;
 }
 .info-profile {
   justify-content: space-between;
   padding: 8px 0;
   border-bottom: 1px solid #eee;
 }
-.info-profile span {
-  width: 120px;
-  font-weight: bold;
-}
-
 .info-profile p {
   margin: 0;
 }
-.input-edit,
+.new-data input, 
+.new-data textarea {
+  flex: 1;
+  min-width: 250px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+.input-edit, 
 textarea.input-edit {
   height: 40px;
   width: 300px;
   padding: 8px 12px;
-  border: 1px solid black;
+  border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
   background-color: white;
@@ -82,7 +78,11 @@ textarea.input-edit {
   background-color: white;
   color: black;
 }
-.btn-pw,
+.nv-pw {
+  display: inline-block;
+  white-space: nowrap;
+}
+.btn-pw, 
 .flex.space-x-2 {
   display: flex;
   gap: 15px;
@@ -91,7 +91,7 @@ textarea.input-edit {
   width: 100%;
   max-width: 500px;
 }
-.btn-edit,
+.btn-edit, 
 .btn-pw button {
   width: 170px;
   height: 50px;
@@ -106,17 +106,9 @@ textarea.input-edit {
   align-items: center;
   justify-content: center;
 }
-.btn-edit:hover,
+.btn-edit:hover, 
 .btn-pw button:hover {
   background-color: #ca8400;
-}
-.pw-form,
-.space-y-4 {
-  width: 100%;
-  max-width: 500px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 .profile-charge {
   width: 100%;
@@ -130,17 +122,34 @@ textarea.input-edit {
   .new-data {
     flex-direction: column;
     align-items: flex-start;
-    gap: 5px;
+    gap: 10px;
   }
-
+  
+  .new-data span,
+  .info-profile span {
+    width: 100%;
+    text-align: left;
+    padding-right: 0;
+    margin-bottom: 5px;
+  }
+  
   .input-edit,
-  textarea.input-edit {
+  textarea.input-edit,
+  .new-data input,
+  .new-data textarea {
     width: 100%;
   }
-
+  
   .btn-pw,
   .flex.space-x-2 {
     flex-direction: column;
     align-items: center;
+    gap: 10px;
+  }
+  
+  .btn-edit, 
+  .btn-pw button {
+    width: 100%;
+    max-width: 250px;
   }
 }
