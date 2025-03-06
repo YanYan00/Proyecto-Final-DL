@@ -20,7 +20,7 @@
     height: 200px;
     display: flex;
     flex-direction: row;
-    background-color: rgb(222, 225, 224);
+    background-color: rgb(229, 236, 234);
     border: 0.5px solid black;
     gap: 20px;
 }
@@ -46,4 +46,6 @@
 }
 .btns-pub{
     gap: 30px;
+    align-items: end;
+    justify-content: end;
 }
