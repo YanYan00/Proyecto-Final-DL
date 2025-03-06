@@ -155,7 +155,15 @@ form {
   border-radius: 4px;
   font-size: 16px;
 }
-.carac-edit-inp select,textarea{
+.carac-edit-inp textarea{
+    background-color: white;
+    color: black;
+}
+.carac-edit-inp select{
+    background-color: white;
+    color: black;
+}
+.option-cat{
     background-color: white;
     color: black;
 }

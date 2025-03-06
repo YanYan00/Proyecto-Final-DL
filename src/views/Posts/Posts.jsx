@@ -279,6 +279,7 @@ const Posts = () =>{
                         <option 
                             key={categoria.idcategoria} 
                             value={categoria.idcategoria}
+                            className='option-cat'
                         >
                             {categoria.nombre}
                         </option>
