@@ -175,7 +175,7 @@ const Posts = () =>{
         <form onSubmit={handleSubmit}>
             <div className="edit-form-img">
                 <div>
-                    <label className="carac-img">Imagen del producto: </label>
+                    <label className="carac-edit">Imagen del producto: </label>
                     <input
                         type="file"
                         accept="image/*"
