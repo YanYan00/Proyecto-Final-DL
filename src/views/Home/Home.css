@@ -150,7 +150,7 @@
     transform: rotate(-45deg);
     top: 0;
 }
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 426px) {
     .main-content {
       flex-direction: column;
     }
