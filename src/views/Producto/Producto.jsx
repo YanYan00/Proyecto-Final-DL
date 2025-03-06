@@ -4,6 +4,7 @@ import { CartContext } from "../../context/CartContext";
 import { ItemsContext } from "../../context/ItemsContext";
 import { UserContext } from "../../context/UserContext";
 import { Button, Col, Container, Row } from "react-bootstrap";
+import './Producto.css'
 
 const Producto = () =>{
     const {id} = useParams();
