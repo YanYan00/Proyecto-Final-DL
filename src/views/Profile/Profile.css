@@ -1,0 +1,42 @@
+.profile-user{
+    width: 100%;
+    min-height: calc(100vh - 10vh);
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+.form-data{
+    width: 100%;
+    min-height: calc(100vh - 10vh);
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+.form-pw{
+    width: 100%;
+    min-height: calc(100vh - 10vh);
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+.info-profile{
+    display: flex;
+    flex-direction: row;
+}
+.btn-edit{
+    width: 100px;
+    height: 30px;
+    background-color: #EE9B00;
+    color: white;
+    border: 95%;
+}
+.new-data{
+    display: flex;
+    flex-direction: row;
+    gap:20px
+}
+
+.input-edit{
+    height: 40px;
+    width: 300px;
+}

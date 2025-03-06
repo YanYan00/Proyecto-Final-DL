@@ -35,7 +35,7 @@ const Profile = () => {
 
   if (!perfil) {
     return (
-      <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+      <div className="profile-charge">
         <p className="text-center text-gray-600">Cargando perfil...</p>
       </div>
     );
@@ -109,22 +109,27 @@ const Profile = () => {
         <div className="form-pw">
           <h2 className="pw-title">Cambiar contraseña</h2>
           <form onSubmit={handleSubmit} className="pw-form">
-            <label className="nv-pw">Nueva contraseña</label>
-            <input 
-              type="password" 
-              name="password" 
-              value={formData.password} 
-              onChange={handleInputChange}
-              required
-            />
-            <label className="nv-pw">Confirmar contraseña</label>
-            <input 
-              type="password"
-              name="confirmPass"
-              value={formData.confirmPass}
-              onChange={handleInputChange}
-              required 
-            />
+            <div className="new-data">
+              <span><label className="nv-pw">Nueva contraseña: </label></span>
+              <input 
+                type="password" 
+                name="password" 
+                value={formData.password} 
+                onChange={handleInputChange}
+                required
+              />  
+            </div>
+            <div className="new-data">
+              <span><label className="nv-pw">Confirmar contraseña: </label></span>
+              <input 
+                type="password"
+                name="confirmPass"
+                value={formData.confirmPass}
+                onChange={handleInputChange}
+                required 
+              />
+            </div>
+            
             <div className="btn-pw">
               <button type="submit">Guardar Cambios</button>
               <button onClick={handleCancel} type="button">Cancelar</button>
@@ -135,49 +140,49 @@ const Profile = () => {
     }
     if (typeEditing === "datos") {
       return (
-        <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
-          <h2 className="text-2xl font-bold mb-4">Editar Perfil</h2>
+        <div className="form-data">
+          <h2 className="pf-title">Editar Perfil</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="block text-gray-700">Nombre</label>
+            <div className="new-data">
+              <span><label className="block text-gray-700">Nombre: </label></span>
               <input 
                 type="text" 
                 name="nombre" 
                 value={formData.nombre} 
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded"
+                className="input-edit"
                 required
               />
             </div>
-            <div>
-              <label className="block text-gray-700">Correo</label>
+            <div className="new-data">
+              <span><label className="block text-gray-700">Correo: </label></span>
               <input 
                 type="email" 
                 name="correo" 
                 value={formData.correo} 
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded"
+                className="input-edit"
                 required
               />
             </div>
-            <div>
-              <label className="block text-gray-700">Teléfono</label>
+            <div className="new-data">
+              <span><label className="block text-gray-700">Teléfono: </label></span>
               <input 
                 type="tel" 
                 name="telefono" 
                 value={formData.telefono} 
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded"
+                className="input-edit"
                 required
               />
             </div>
-            <div>
-              <label className="block text-gray-700">Dirección</label>
+            <div className="new-data">
+              <span><label className="block text-gray-700">Dirección: </label></span>
               <textarea 
                 name="direccion" 
                 value={formData.direccion} 
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded"
+                className="input-edit"
                 rows="3"
                 required
               ></textarea>
@@ -185,14 +190,14 @@ const Profile = () => {
             <div className="flex space-x-2">
               <button 
                 type="submit"
-                className="px-4 py-2 bg-green-500 text-white rounded"
+                className="btn-edit"
               >
                 Guardar Cambios
               </button>
               <button 
                 onClick={handleCancel}
                 type="button"
-                className="px-4 py-2 bg-gray-300 text-gray-700 rounded"
+                className="btn-edit"
               >
                 Cancelar
               </button>
@@ -203,23 +208,23 @@ const Profile = () => {
     }
   }
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
-      <h2 className="text-2xl font-bold mb-4">Perfil de Usuario</h2>
+    <div className="profile-user">
+      <h2 className="profile-title">Perfil de Usuario</h2>
       <div className="space-y-4">
-        <div>
-          <p className="text-gray-600">Nombre:</p>
+        <div className="info-profile">
+          <span><p className="text-gray-600">Nombre:</p></span>  
           <p className="font-medium">{perfil.nombre}</p>
         </div>
-        <div>
-          <p className="text-gray-600">Email:</p>
+        <div className="info-profile">
+          <span><p className="text-gray-600">Email:</p></span>  
           <p className="font-medium">{perfil.correo}</p>
         </div>
-        <div>
-          <p className="text-gray-600">Teléfono:</p>
+        <div className="info-profile">
+          <span><p className="text-gray-600">Teléfono:</p></span>
           <p className="font-medium">{perfil.telefono || 'No especificado'}</p>
         </div>
-        <div>
-          <p className="text-gray-600">Dirección:</p>
+        <div className="info-profile">
+          <span><p className="text-gray-600">Dirección:</p></span>
           <p className="font-medium">{perfil.direccion || 'No especificada'}</p>
         </div>
         <div className="flex space-x-2 mt-4">
@@ -228,7 +233,7 @@ const Profile = () => {
               setIsEditing(true);
               setTypeEditing("datos");
             }}
-            className="px-4 py-2 bg-blue-500 text-white rounded"
+            className="btn-edit"
           >
             Editar datos
           </button>
@@ -237,7 +242,7 @@ const Profile = () => {
               setIsEditing(true);
               setTypeEditing("contraseña");
             }}
-            className="px-4 py-2 bg-green-500 text-white rounded"
+            className="btn-edit"
           >
             Cambiar contraseña
           </button>
