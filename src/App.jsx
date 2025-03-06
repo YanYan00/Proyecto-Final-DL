@@ -10,6 +10,7 @@ import Profile from './views/Profile/Profile.jsx'
 import Producto from './views/Producto/Producto.jsx'
 import Orders from './views/Orders/Orders.jsx'
 import Purchases from './views/Purchases/Purchases.jsx'
+import Footer from './components/Footer/Footer.jsx'
 function App() {
   return (
     <>
@@ -25,6 +26,7 @@ function App() {
         <Route path='/orders' element={<Orders></Orders>}></Route>
         <Route path='/purchases' element={<Purchases></Purchases>}></Route>
       </Routes>
+      <Footer></Footer>
     </>
   )
 }
