@@ -1,42 +1,119 @@
-.profile-user{
-    width: 100%;
-    min-height: calc(100vh - 10vh);
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
+.profile-user,
+.form-data,
+.form-pw {
+  width: 100%;
+  min-height: calc(100vh - 10vh);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
-.form-data{
-    width: 100%;
-    min-height: calc(100vh - 10vh);
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
+.profile-title,
+.pf-title,
+.pw-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #005F73;
+  text-align: center;
 }
-.form-pw{
-    width: 100%;
-    min-height: calc(100vh - 10vh);
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-}
-.info-profile{
-    display: flex;
-    flex-direction: row;
-}
-.btn-edit{
-    width: 100px;
-    height: 30px;
-    background-color: #EE9B00;
-    color: white;
-    border: 95%;
-}
-.new-data{
-    display: flex;
-    flex-direction: row;
-    gap:20px
+.info-profile,
+.new-data {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 15px;
 }
 
-.input-edit{
-    height: 40px;
-    width: 300px;
+.info-profile {
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.info-profile span,
+.new-data span {
+  width: 120px;
+  font-weight: bold;
+}
+
+.info-profile p {
+  margin: 0;
+}
+.input-edit,
+textarea.input-edit {
+  height: 40px;
+  width: 300px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+textarea.input-edit {
+  height: auto;
+  min-height: 80px;
+}
+.btn-pw,
+.flex.space-x-2 {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+  justify-content: center;
+  width: 100%;
+  max-width: 500px;
+}
+.btn-edit,
+.btn-pw button {
+  width: 150px;
+  height: 40px;
+  background-color: #EE9B00;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-edit:hover,
+.btn-pw button:hover {
+  background-color: #ca8400;
+}
+.pw-form,
+.space-y-4 {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profile-charge {
+  width: 100%;
+  min-height: calc(100vh - 10vh);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (max-width: 768px) {
+  .info-profile,
+  .new-data {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .input-edit,
+  textarea.input-edit {
+    width: 100%;
+  }
+
+  .btn-pw,
+  .flex.space-x-2 {
+    flex-direction: column;
+    align-items: center;
+  }
 }
