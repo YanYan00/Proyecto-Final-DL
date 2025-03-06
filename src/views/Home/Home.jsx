@@ -10,6 +10,7 @@ const Home = () => {
   const [botonActivo,setBotonActivo] = useState(null);
   const [buscador,setBuscador] = useState('');
   const [pagina,setPagina] = useState(1);
+  const [menuOpen, setMenuOpen] = useState(false);
   const {items,categorias} = useContext(ItemsContext);
   const {añadirItem} = useContext(CartContext);
   const inicio = (pagina-1) * 6;
@@ -42,34 +43,63 @@ const Home = () => {
       return;
     }
     setBotonActivo(categoria);
+    setMenuOpen(false);
   }
 
-  
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
   return (
-    <div className="text-center mt-10">
-      <Form className="d-flex flex-grow-1 mx-4">
-        <Form.Control
-          type="search"
-          placeholder="Buscar productos"
-          className="me-2 flex-grow-1"
-          aria-label="Search"
-          value={buscador}
-          onChange={(e) => setBuscador(e.target.value)}
-        />
-      </Form>
-      <div className="menu-cat">
-        {categorias.map((categoria,index)=>(
-          <button onClick={()=>{filtrarItems(categoria)}} key={index} className={botonActivo?.nombre === categoria.nombre ? 'active' : ''}>{categoria.nombre}</button>
+    <div className="home">
+      <div className="search-container">
+        <Form className="search-form">
+          <Form.Control
+            type="search"
+            placeholder="Buscar productos"
+            className="buscador"
+            aria-label="Search"
+            value={buscador}
+            onChange={(e) => setBuscador(e.target.value)}
+          />
+        </Form>
+        <div className="menu-toggle" onClick={toggleMenu}>
+          <div className={`hamburger ${menuOpen ? 'open' : ''}`}></div>
+        </div>
+      </div>
+      
+      <div className={`menu-cat ${menuOpen ? 'active' : ''}`}>
+        {categorias.map((categoria, index) => (
+          <button 
+            onClick={() => filtrarItems(categoria)} 
+            key={index} 
+            className={botonActivo?.nombre === categoria.nombre ? 'active' : ''}
+          >
+            {categoria.nombre}
+          </button>
         ))}
       </div>
+      
       <div className="cards">
-        {mostrarItems.map((item,index)=>(
-          <CardItem item={item} key={index} añadirItem ={añadirItem}/>
+        {mostrarItems.map((item, index) => (
+          <CardItem item={item} key={index} añadirItem={añadirItem} />
         ))}
       </div>
+      
       <div className="paginacion">
-        <button onClick={() => setPagina(p => p-1)} disabled={pagina===1}>Anterior</button>
-        <button onClick={() => setPagina(p => p+1)} disabled={mostrarItems.length<6}>Siguiente</button>
+        <button 
+          onClick={() => setPagina(p => p-1)} 
+          disabled={pagina === 1} 
+          className="pag-btn"
+        >
+          Anterior
+        </button>
+        <button 
+          onClick={() => setPagina(p => p+1)} 
+          disabled={mostrarItems.length < 6} 
+          className="pag-btn"
+        >
+          Siguiente
+        </button>
       </div>
     </div>
   );
