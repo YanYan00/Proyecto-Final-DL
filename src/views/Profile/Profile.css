@@ -18,23 +18,47 @@
   color: #005F73;
   text-align: center;
 }
-.info-profile,
 .new-data {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 15px;
+}
+.new-data span {
+    width: 180px;
+    text-align: right;
+    padding-right: 10px;
+    font-weight: bold;
+}
+
+.info-profile {
   display: flex;
   align-items: center;
   width: 100%;
   max-width: 500px;
   margin-bottom: 15px;
 }
-
+.new-data input,
+.new-data textarea {
+  flex: 1;
+  min-width: 250px;
+}
+.form-pw .pw-form {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+.nv-pw {
+  display: inline-block;
+  white-space: nowrap;
+}
 .info-profile {
   justify-content: space-between;
   padding: 8px 0;
   border-bottom: 1px solid #eee;
 }
-
-.info-profile span,
-.new-data span {
+.info-profile span {
   width: 120px;
   font-weight: bold;
 }

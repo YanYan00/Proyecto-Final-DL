@@ -10,7 +10,7 @@
 }
   
 .btn-view {
-    height: 50px;
+    height: 45px;
     width: 120px;
     background-color: #EE9B00;
     color: white;
@@ -96,8 +96,8 @@
       align-items: center;
     }
     .btn-view {
-        height: 120px;
-        width: 40px;
+        height: 40px;
+        width: 120px;
         background-color: #EE9B00;
         color: white;
         border: none;
