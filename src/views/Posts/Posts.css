@@ -48,6 +48,8 @@
     gap: 30px;
     align-items: end;
     justify-content: end;
+    display: flex;
+    flex-direction: column;
 }
 .render-posts-type{
     align-items: center;
