@@ -161,8 +161,11 @@ const Posts = () =>{
                             <h4 className="title-pub">{item.titulo}</h4>
                             <p className="price-pub">${item.precio.toLocaleString()}</p>
                             <p>{item.descripcion}</p>
+  
+                        </div>
+                        <div className='btns-pub'>
                             <button onClick={() => handleEdit(item)} className='btn-pub'>Editar</button>
-                            <button onClick={() => handleDelete(item.idpublicacion, item.idproducto)} className='btn-pub'>Eliminar</button>    
+                            <button onClick={() => handleDelete(item.idpublicacion, item.idproducto)} className='btn-pub'>Eliminar</button>  
                         </div>
                     </div>
                 ))}

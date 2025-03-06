@@ -16,11 +16,11 @@
     justify-content: center;
 }
 .cont-pub{
-    width: 80%;
+    width: 95%;
     height: 200px;
     display: flex;
     flex-direction: row;
-    background-color: rgb(184, 190, 188);
+    background-color: rgb(222, 225, 224);
     border: 0.5px solid black;
     gap: 20px;
 }
@@ -43,4 +43,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.btns-pub{
+    gap: 30px;
 }
