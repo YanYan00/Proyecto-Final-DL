@@ -18,15 +18,15 @@ const LoginPage = () => {
   };
 
   return (
-    <form className="loginForm" onSubmit={(e) => handleLoginSubmit(e,data)}>
-      <h2>Inicio de Sesión</h2>
+    <form className="form-login" onSubmit={(e) => handleLoginSubmit(e,data)}>
+      <h2 className="titulo-login">Inicio de Sesión</h2>
       <Row className="row">
-        <Col><input type="email" name="email" value={data.email} onChange={handleChange}/></Col>
+        <Col><input type="email" name="email" className="info-login" value={data.email} onChange={handleChange}/></Col>
       </Row>
       <Row className="row">
-        <Col><input type="password" name="password" value={data.password} onChange={handleChange}></input></Col>
+        <Col><input type="password" name="password" className="info-login" value={data.password} onChange={handleChange}></input></Col>
       </Row>
-      <Button className='send-button' type='submit'>Enviar</Button>
+      <Button className='btn-login' type='submit'>Enviar</Button>
     </form>
     
   );
